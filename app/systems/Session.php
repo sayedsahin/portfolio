@@ -1,5 +1,5 @@
 <?php
-namespace System;
+namespace Systems;
 class Session{
 	public static function init(){
 		if (session_status() == PHP_SESSION_NONE) {

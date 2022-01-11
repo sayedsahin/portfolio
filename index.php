@@ -1,11 +1,7 @@
 <?php
+	require_once __DIR__.'/vendor/autoload.php';
 
-	spl_autoload_register(function($class){
-		include_once 'app/'.$class.'.php';
-	});
-
-	include_once 'app/config/config.php';
-	include_once 'app/system/Utility.php';
-
-	$main = new System\Core(); 
+	require_once 'app/config/config.php';
+	include_once 'app/systems/Utility.php';
+	$main = new \Systems\Core();
 ?>

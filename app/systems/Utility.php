@@ -30,7 +30,7 @@ function isAjax() : bool
 }
 function session()
 {
-	return new \System\Session;
+	return new \Systems\Session;
 }
 //For Development only
 function pr(array $array)

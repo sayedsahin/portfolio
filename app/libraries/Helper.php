@@ -1,4 +1,6 @@
 <?php 
+
+use Systems\Session;
 class Helper
 {
 	public function back()

@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
-namespace System;
+
+namespace Systems;
 use PDO;
+
 class Model
 {
 	protected object $db;

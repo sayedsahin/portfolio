@@ -1,6 +1,6 @@
 <?php 
 namespace Libraries;
-use System\Session;
+use Systems\Session;
 
 class Redirect
 {
