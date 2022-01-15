@@ -3053,11 +3053,11 @@ textarea.form-control-lg {
 .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(60, 198, 171, 0.5);
 }
-.btn-primary:disabled, .btn-primary.disabled {
+/*.btn-primary:disabled, .btn-primary.disabled {
   color: #fff;
   background-color: #1abc9c;
   border-color: #1abc9c;
-}
+}*/
 
 .btn-secondary {
   color: #fff;
@@ -11369,13 +11369,13 @@ html {
   color: #fff;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-  color: #1abc9c;
+  color: #ff5722;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
   color: #fff;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
-  color: #1abc9c;
+  color: #ff5722;
 }
 #mainNav .navbar-toggler {
   font-size: 80%;
@@ -11397,11 +11397,11 @@ html {
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
     color: #fff;
-    background: #1abc9c;
+    background: #ff5722;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #fff;
-    background: #1abc9c;
+    background: #ff5722;
   }
 
   #mainNav.navbar-shrink {
@@ -11472,7 +11472,7 @@ html {
   left: 0;
   transition: all 0.2s ease-in-out;
   opacity: 0;
-  background-color: rgba(26, 188, 156, 0.9);
+  background-color: #ff5722;
 }
 .portfolio .portfolio-item .portfolio-item-caption:hover {
   opacity: 1;
@@ -11482,7 +11482,7 @@ html {
 }
 
 .portfolio-modal .btn-close {
-  color: #1abc9c;
+  color: #ff5722;
   font-size: 2rem;
   padding: 1rem;
 }
@@ -11507,3 +11507,8 @@ html {
 .copyright {
   background-color: #1a252f;
 }
+.bg-primary {background-color: #ff5722 !important;}
+a { color: #ff5722;}
+a:hover {color: #c33f15;}
+.btn-primary {background-color: #ff5722 !important; border-color: #eb5d31 !important;}
+.w-svg {width: 24px;height: 25px;}
