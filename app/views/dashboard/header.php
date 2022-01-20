@@ -37,7 +37,7 @@
 		  		</button>
 		  		<div class="collapse" id="home-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/dashboard/user" class="link-dark rounded">My Info</a></li>
+		  				<li><a href="<?= BASE_URL ?>/user/edit" class="link-dark rounded">My Info</a></li>
 		  				<li><a href="<?= BASE_URL ?>/dashboard/site" class="link-dark rounded">Site Info</a></li>
 		  			</ul>
 		  		</div>
@@ -48,8 +48,8 @@
 		  		</button>
 		  		<div class="collapse" id="project-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/dashboard/projects" class="link-dark rounded">Project List</a></li>
-		  				<li><a href="<?= BASE_URL ?>/<?= BASE_URL ?>/dashboard/projectadd" class="link-dark rounded">Project Add</a></li>
+		  				<li><a href="<?= BASE_URL ?>/project" class="link-dark rounded">Project List</a></li>
+		  				<li><a href="<?= BASE_URL ?>/project/create" class="link-dark rounded">Project Add</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -59,8 +59,8 @@
 		  		</button>
 		  		<div class="collapse" id="dashboard-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/dashboard/socials" class="link-dark rounded">Social List</a></li>
-		  				<li><a href="<?= BASE_URL ?>/dashboard/socialsadd" class="link-dark rounded">Add Social</a></li>
+		  				<li><a href="<?= BASE_URL ?>/social" class="link-dark rounded">Social List</a></li>
+		  				<li><a href="<?= BASE_URL ?>/social/create" class="link-dark rounded">Add Social</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -72,7 +72,7 @@
 		  		<div class="collapse" id="account-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 		  				<li><a href="<?= BASE_URL ?>/dashboard/password" class="link-dark rounded">Change Password</a></li>
-		  				<li><a href="#" class="link-dark rounded">Sign out</a></li>
+		  				<li><a href="<?= BASE_URL; ?>/account/logout" class="link-dark rounded">Sign out</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>

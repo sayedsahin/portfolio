@@ -3,6 +3,7 @@ namespace Systems;
 class Session{
 	public static function init(){
 		if (session_status() == PHP_SESSION_NONE) {
+			// ini_set('session.gc_maxlifetime', 2592000) ; //30 days
 			session_start();
 		}
 	}
@@ -24,7 +25,7 @@ class Session{
 		self::init();
 		if (self::get("login") == false) {
 			self::destroy();
-			if (!isset($_GET['ajax'])) {
+			if (!isAjax()) {
 				header("Location:".BASE_URL."/account/login");
 			}else{
 				echo "login";

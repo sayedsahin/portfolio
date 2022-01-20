@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Models\Home;
+use Systems\Session;
 use Systems\Controller;
 use Systems\Model;
 
@@ -11,6 +12,8 @@ class DashboardController extends Controller
 	function __construct()
 	{
 		parent::__construct();
+		Session::init();
+		Session::auth();
 		$data = [];
 	}
 
@@ -18,26 +21,10 @@ class DashboardController extends Controller
 	{
 		return view('dashboard/index');
 	}
-
-	public function user()
-	{
-		return view('dashboard/user');
-	}
+	
 	public function password()
 	{
 		return view('dashboard/password');
-	}
-
-	public function projects()
-	{
-		$db = new Model();
-		$data['projects'] = $db->select('id, name, description, thumb')->table('projects')->get();
-		return view('dashboard/projects', $data);
-	}
-
-	public function projectadd()
-	{
-		return view('dashboard/project_add');
 	}
 
 }

@@ -3,6 +3,7 @@ namespace Controllers;
 
 use Models\Home;
 use Systems\Controller;
+use Systems\Session;
 
 class HomeController extends Controller
 {
@@ -10,6 +11,7 @@ class HomeController extends Controller
 	function __construct()
 	{
 		parent::__construct();
+		Session::init();
 		$this->model = new Home();
 		$data = [];
 	}
@@ -22,7 +24,15 @@ class HomeController extends Controller
 		$data['about'] = $this->model->about();
 		$data['socials'] = $this->model->social();
 		$this->load->view('index', $data);
-		pr($data);
+	}
+
+	public function project(int $id=0)
+	{
+		$data['project'] = $this->model->table('projects')->find($id);
+		$data['socials'] = $this->model->select('icon, link')->table('socials')->get();
+		$data['images'] = $this->model->table('project_image')->where('project_id', $id)->get();
+
+		return view('project/show', $data);
 	}
 }
 ?>

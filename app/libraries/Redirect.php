@@ -1,25 +1,27 @@
 <?php 
 namespace Libraries;
-use Systems\Session;
 
 class Redirect
 {
 	protected string $link;
-	protected array $messege = [];
+	protected array $message = [];
+
 	public function __construct(string $link)
 	{
-		Session::init();
-		$this->link=$link;
+		$this->link = BASE_URL.$link;
 	}
+
 	public function __destruct()
 	{
 		$this->redirect();
 	}
+
 	public function with(array $msg)
 	{
-		$this->messege = $msg;
+		$this->message = $msg;
 		return $this;
 	}
+
 	public function back() 
 	{
 		if (isset($_SERVER['HTTP_REFERER'])) {
@@ -37,26 +39,27 @@ class Redirect
 	    }
 	    return $this;
 	}
+	
 	public function redirect()
 	{
 		if (!empty($this->link)) {
 			if (isAjax()) {
-				foreach ($this->messege as $key => $value) {
+				foreach ($this->message as $key => $value) {
 					echo $key.' = '.$value.'<br>';
 				}
 			}else {
-				if (!empty($this->messege)) {
-					$_SESSION['messege'] = $this->messege;
+				if (!empty($this->message)) {
+					$_SESSION['message'] = $this->message;
 				}
 				header("Location: " . $this->link);
+				exit;
 			}
 			
 		}else{
-			foreach ($this->messege as $key => $value) {
+			foreach ($this->message as $key => $value) {
 				echo $key.' = '.$value.'<br>';
 			}
 		}
-		exit();
 	}
 
 }

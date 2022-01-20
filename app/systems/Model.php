@@ -38,7 +38,7 @@ class Model
 	    return $this;
 	}
 
-	public function where(string $key, string|null $val)
+	public function where(string $key, string|int|null $val)
 	{
 		$where = (empty($this->where)) ? "WHERE" : "AND" ;
 		$this->where .= " {$where} {$key} = :{$key}";
@@ -46,14 +46,20 @@ class Model
 		return $this;
 	}
 
-	public function orWhere(string $key, string|null $val)
+	public function find(int $id, string $fetch='')
+	{
+		$this->where('id', $id);
+		return $this->get('single', $fetch);
+	}
+
+	public function orWhere(string $key, string|int|null $val)
 	{
 		$this->where .= " OR $key = :$key";
 		$this->bindValue = array_merge($this->bindValue, [$key => $val]);
 		return $this;
 	}
 
-	public function notWhere(string $key, string|null $val)
+	public function notWhere(string $key, string|int|null $val)
 	{
 		$where = (empty($this->notWhere)) ? "AND" : "WHERE";
 		$this->where .= " $where NOT $key = :$key";
@@ -127,7 +133,7 @@ class Model
 			}
 		}
 		$query->execute();
-		$fetch = ($fetch == 'obj') ? PDO::FETCH_OBJ : PDO::FETCH_ASSOC ;
+		$fetch = ($fetch == 'object') ? PDO::FETCH_OBJ : PDO::FETCH_ASSOC ;
 		$row = match ($type) {
 			'' => ($query->rowCount() > 0)? $query->fetchAll($fetch) : '',
 			'all' => $query->fetchAll(),
@@ -220,7 +226,8 @@ class Model
 	{
 		$this->bindValue = [];
 		$this->select = '*';
-		$this->table = $this->join = $this->where = $this->order = $this->limit = '';
+		$this->join = $this->where = $this->order = $this->limit = '';
+		// $this->table = '';
 		return;
 	}
 	

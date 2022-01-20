@@ -15,7 +15,7 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Around the Web</h4>
                         <?php foreach ($socials as $key => $social) { ?>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!">
+                        <a class="btn btn-outline-light btn-social mx-1" href="<?= $social['link'] ?>" target="_blank">
                             <?= $social['icon'] ?>
                         </a>
                         <?php } ?>

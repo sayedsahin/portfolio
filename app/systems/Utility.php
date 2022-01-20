@@ -33,12 +33,12 @@ function session()
 	return new \Systems\Session;
 }
 //For Development only
-function pr(array $array)
+function pr($array)
 {
 	echo "<pre>";
 	print_r($array);
 	echo "</pre>";
-	// exit();
+	exit();
 }
 function dd($array)
 {
