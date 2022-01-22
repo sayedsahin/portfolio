@@ -19,7 +19,10 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($projects as $key => $project) { ?>
+    <?php 
+    if ($projects) {
+    foreach ($projects as $key => $project) { 
+    ?>
     <tr>
       <th scope="row"><?= $project['id']; ?></th>
       <td><a class="fw-bold text-secondary" href="<?= BASE_URL; ?>/project/show/<?= $project['id']; ?>"><?= $project['name']; ?></a></td>
@@ -32,7 +35,7 @@
         <a href="<?= BASE_URL; ?>/project/delete/<?= $project['id']; ?>" class="text-danger">delete</a>
       </td>
     </tr>
-    <?php } ?>
+    <?php } } ?>
   </tbody>
 
 <?php view('dashboard/footer'); ?>

@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Libraries\Form;
-use Models\Contact;
+use Models\Message;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -10,24 +10,34 @@ use PHPMailer\PHPMailer\isHTML;
 use Systems\Controller;
 use Systems\Session;
 
-class ContactController extends Controller
+class MessageController extends Controller
 {
 	protected object $model;
 	function __construct()
 	{
 		parent::__construct();
-		$this->model = new Contact;
+		$this->model = new Message;
 		Session::init();
 		$data = [];
 	}
 
 	public function index()
 	{
-		helper(['message', 'text']);
-		return view('contact/index', [
-			'contacts' => $this->model->limit(100)->get(),
+		helper(['message', 'text', 'time']);
+		return view('message/index', [
+			'messages' => $this->model->limit(100)->order('id DESC')->get(),
 		]);
 
+	}
+
+	public function show($id=0)
+	{
+		helper(['time', 'message', 'text']);
+		$data['message'] = $this->model->find($id);
+		$data['replies'] = $this->model->table('replies')
+			->where('message_id', $id)
+			->get();
+	    return view('message/show', $data);
 	}
 
 	public function store()
@@ -37,17 +47,35 @@ class ContactController extends Controller
 		$valid->post('name')->required()->length_utf8(0, 255);
 		$valid->post('email')->required()->email()->length_utf8(0, 255);
 		$valid->post('phone')->length_utf8(0, 255);
-		$valid->post('message')->required();
+		$valid->post('body')->required();
 
 		$valid->submit() ?: redirect('/#submitMessage')->with(['errors' => $valid->errors]);
 
 		$id = $this->model->insert($valid->values, 'id');
-		$email = !$id ?: $this->email($valid->values);
 
-		!$email ?: Session::set('message', ['success' => 'Email Has Been Sent']);
-		exit( '<script>window.location.href = "/#submitMessage"</script>');
+		return !$id ?: redirect('/#submitMessage')->with(['success' => 'email has been sent']);
+	}
 
-		// !$email ?: redirect('/#submitMessage')->with(['success' => 'email has been sent']);
+	public function reply()
+	{
+	    $_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
+		$valid = new Form();
+		$valid->post('message_id')->required();
+		$valid->post('body')->required();
+		$valid->post('name')->required();
+		$valid->post('email')->required()->email();
+		$valid->post('subject');
+
+		$valid->submit() ?: redirect()->back()->with(['errors' => $valid->errors]);
+
+		$id = $this->model->table('replies')->insert([
+			'message_id' => $valid->values['message_id'],
+			'body' => $valid->values['body']
+		], 'id');
+		$id = !$id ?: $this->email($valid->values);
+
+		!$id ?: Session::set('message', ['success' => 'Reply Has Been Sent']);
+		exit('<script>window.location.href = "/message/show/'.$valid->values['message_id'].'"</script>');
 	}
 
 	public function delete(int $id=0)
@@ -56,13 +84,37 @@ class ContactController extends Controller
 		$message ?: exit('404 not found') ;
 
 		$delete = $this->model->delete($id);
-		!$delete ?: redirect('/contact')->with(['success' => 'message has been deleted']);
+		!$delete ?: redirect('/message')->with(['success' => 'message has been deleted']);
+	}
+
+	public function new()
+	{
+		helper(['message']);
+	    return view('message/new');
+	}
+
+	public function sendMessage()
+	{
+		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
+		$valid = new Form();
+		$valid->post('email')->required()->email();
+		$valid->post('subject')->required();
+		$valid->post('body')->required();
+
+		$valid->submit() ?: redirect()->back()->with(['errors' => $valid->errors]);
+		$valid->values['name'] = strstr($valid->values['email'], '@', true);
+
+		$email = $this->email($valid->values);
+
+		!$email ?: Session::set('message', ['success' => 'Mail Has Been Sent']);
+		exit('<script>window.location.href = "/message/new"</script>');
 	}
 
 	public function email(array $data)
 	{
 		//Create an instance; passing `true` enables exceptions
 		$mail = new PHPMailer(true);
+		$mail->CharSet = "UTF-8";
 
 		try {
 			//Server settings
@@ -89,14 +141,14 @@ class ContactController extends Controller
 
 			//Content
 			$mail->isHTML(true);                                  //Set email format to HTML
-			$mail->Subject = 'Here is the subject';
+			$mail->Subject = $data['subject'];
 
 			ob_start();
 			view('email/leemunroe', ['email' => $data]);
 			$body = ob_get_clean();
 
 			$mail->Body    = $body;
-			$mail->AltBody = $data['message'];
+			$mail->AltBody = $data['body'];
 
 			$mail->send();
 

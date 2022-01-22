@@ -70,8 +70,8 @@
 		  		</button>
 		  		<div class="collapse" id="dashboard-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/contact/new" class="link-dark rounded">New</a></li>
-		  				<li><a href="<?= BASE_URL ?>/contact" class="link-dark rounded">Inbox</a></li>
+		  				<li><a href="<?= BASE_URL ?>/message/new" class="link-dark rounded">New</a></li>
+		  				<li><a href="<?= BASE_URL ?>/message" class="link-dark rounded">Inbox</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>

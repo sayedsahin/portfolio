@@ -18,7 +18,7 @@ class HomeController extends Controller
 
 	public function index()
 	{
-		
+		helper(['message']);
 		$data['user'] = $this->model->user();
 		$data['projects'] = $this->model->project();
 		$data['about'] = $this->model->about();

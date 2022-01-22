@@ -2,9 +2,9 @@
 namespace Models;
 use Systems\Model;
 
-class Contact extends Model
+class Message extends Model
 {
-	protected string $table = 'contacts';
+	protected string $table = 'messages';
 
 	function __construct()
 	{

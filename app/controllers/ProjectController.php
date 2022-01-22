@@ -34,6 +34,7 @@ class ProjectController extends Controller
 	{
 		$data['project'] = $this->model->project($id);
 		$data['socials'] = $this->model->socials();
+		$data['site'] = $this->model->table('sites')->find(1);
 		$data['images'] = $this->model->table('project_image')->where('project_id', $id)->get();
 
 		return view('project/show', $data);

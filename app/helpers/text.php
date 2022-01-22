@@ -3,7 +3,7 @@
 		$text = $text. " ";
 		$text = mb_substr($text, 0, $limit);
 		$text = mb_substr($text, 0, mb_strrpos($text, ' '));
-		$text = $text."....";
+		$text = $text."...";
 		return $text;
 	}
 	function number_formatting($n) {

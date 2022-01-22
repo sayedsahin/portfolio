@@ -22,7 +22,10 @@
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($socials as $key => $social) { ?>
+    <?php 
+      if ($socials) {
+      foreach ($socials as $key => $social) { 
+    ?>
     <tr>
       <th scope="row"><?= $social['id']; ?></th>
       <td><?= $social['name']; ?></td>
@@ -33,7 +36,7 @@
         <a class="btn btn-danger btn-sm" href="<?= BASE_URL; ?>/social/delete/<?= $social['id']; ?>" class="text-danger">delete</a>
       </td>
     </tr>
-    <?php } ?>
+    <?php } } ?>
   </tbody>
 
 <?php view('dashboard/footer'); ?>
