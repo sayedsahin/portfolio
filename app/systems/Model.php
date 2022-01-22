@@ -124,7 +124,6 @@ class Model
 
 	public function get(string $type='', string $fetch='')
 	{
-		// $table = (empty($this->tab)) ? $this->table : $this->tab ;
 		$select = "SELECT {$this->select} FROM {$this->table}{$this->join}{$this->where}{$this->order}{$this->limit}";
 		$query = $this->db->pdo->prepare($select);
 		if (!empty($this->bindValue)) {
@@ -148,7 +147,6 @@ class Model
 	
 	public function insert(array $data = [], string $lastid = '')
 	{
-		// $table = (empty($this->tab)) ? $this->table : $this->tab ;
 		if (!empty($data)) {
 			$keys = '';
 			$values = '';
@@ -165,15 +163,23 @@ class Model
 			if (!empty($lastid)) {
 				$result = $this->db->pdo->lastInsertId();
 			}
-			$this->tab = '';
+			$this->emptyProperty();
 			return $result;
+		}
+	}
+
+	public function updateOrInsert(array $data)
+	{
+		if ($this->get('single')) {
+			$this->update($data);
+		}else{
+			$this->insert($data, 'id');
 		}
 	}
 
 	public function update(array $data = [])
 	{
 		if (!empty($data)) {
-			// $table = (empty($this->tab)) ? $this->table : $this->tab ;
 			$keyvalue = '';
 			$i=0;
 			foreach ($data as $key => $value) {
@@ -203,19 +209,14 @@ class Model
 
 	public function delete(int $id = null)
 	{
-		// $table = (empty($this->tab)) ? $this->table : $this->tab ;
-		if (is_null($id)) {
-			$sql = "DELETE FROM {$this->table}{$this->where}";
-			$query = $this->db->pdo->prepare($sql);
-			
-			foreach ($this->bindValue as $k => $v) {
-				$query->bindValue(":$k", $v);
-			}
-		}else{
-			$sql = "DELETE FROM {$this->table} WHERE id = :id";
-			$query = $this->db->pdo->prepare($sql);
-			$query->bindValue(':id', $id);
+		is_null($id) ?: $this->where('id', $id);
+		$sql = "DELETE FROM {$this->table}{$this->where}";
+		$query = $this->db->pdo->prepare($sql);
+		
+		foreach ($this->bindValue as $k => $v) {
+			$query->bindValue(":$k", $v);
 		}
+
 		$result = $query->execute();
 		$this->emptyProperty();
 		return $result ? true : false;
