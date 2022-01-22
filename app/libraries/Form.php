@@ -35,14 +35,14 @@ class Form
 		}
 		return $this;
 	}
-	public function length($min = 0, $max = 100)
+	public function length($min = 0, $max = 255)
 	{
 		if (strlen($this->values[$this->currentValue]) < $min OR strlen($this->values[$this->currentValue]) > $max) {
 			$this->errors[$this->currentValue] = "Min ".$min." and max ".$max." characters ! ";
 		}
 		return $this;
 	}
-	public function length_utf8($min = 0, $max = 100)
+	public function length_utf8($min = 0, $max = 255)
 	{
 		if (mb_strlen($this->values[$this->currentValue]) < $min OR mb_strlen($this->values[$this->currentValue]) > $max) {
 			$this->errors[$this->currentValue] = "Min ".$min." and max ".$max." characters ! ";

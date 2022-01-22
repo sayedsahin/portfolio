@@ -14,6 +14,7 @@ class SocialController extends Controller
 		parent::__construct();
 		$this->model = new Social;
 		Session::init();
+		Session::auth();
 		$data = [];
 	}
 

@@ -38,7 +38,7 @@
 		  		<div class="collapse" id="home-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 		  				<li><a href="<?= BASE_URL ?>/user/edit" class="link-dark rounded">My Info</a></li>
-		  				<li><a href="<?= BASE_URL ?>/dashboard/site" class="link-dark rounded">Site Info</a></li>
+		  				<li><a href="<?= BASE_URL ?>/site/edit" class="link-dark rounded">Site Info</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -54,13 +54,24 @@
 		  		</div>
 		  	</li>
 		  	<li class="mb-1">
-		  		<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+		  		<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#message-collapse" aria-expanded="false">
 		  			Social Link
 		  		</button>
-		  		<div class="collapse" id="dashboard-collapse" style="">
+		  		<div class="collapse" id="message-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 		  				<li><a href="<?= BASE_URL ?>/social" class="link-dark rounded">Social List</a></li>
 		  				<li><a href="<?= BASE_URL ?>/social/create" class="link-dark rounded">Add Social</a></li>
+		  			</ul>
+		  		</div>
+		  	</li>
+		  	<li class="mb-1">
+		  		<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+		  			Message
+		  		</button>
+		  		<div class="collapse" id="dashboard-collapse" style="">
+		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+		  				<li><a href="<?= BASE_URL ?>/contact/new" class="link-dark rounded">New</a></li>
+		  				<li><a href="<?= BASE_URL ?>/contact" class="link-dark rounded">Inbox</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -71,7 +82,7 @@
 		  		</button>
 		  		<div class="collapse" id="account-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/dashboard/password" class="link-dark rounded">Change Password</a></li>
+		  				<li><a href="<?= BASE_URL ?>/password/edit" class="link-dark rounded">Change Password</a></li>
 		  				<li><a href="<?= BASE_URL; ?>/account/logout" class="link-dark rounded">Sign out</a></li>
 		  			</ul>
 		  		</div>
