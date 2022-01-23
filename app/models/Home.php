@@ -19,7 +19,7 @@ class Home extends Model
 
 	public function project()
 	{
-		return parent::select('id, thumb')->table('projects')->get();
+		return parent::select('id, thumb')->table('projects')->order('id DESC')->get();
 	}
 
 	public function about()
