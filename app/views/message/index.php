@@ -31,8 +31,10 @@
       <td><?= textShorten($message['body'], 30); ?></td>
       <td><?= time_ago($message['created_at']); ?></td>
       <td>
-        <a href="<?= BASE_URL; ?>/message/show/<?= $message['id']; ?>" class="btn btn-outline-dark btn-sm">view</a>
-        <a href="<?= BASE_URL; ?>/message/delete/<?= $message['id']; ?>" class="btn btn-danger btn-sm">delete</a>
+        <div class="d-flex">
+          <a href="<?= BASE_URL; ?>/message/show/<?= $message['id']; ?>" class="btn btn-outline-dark btn-sm me-1">view</a>
+          <a onclick="return confirm('Are you sure?')" href="<?= BASE_URL; ?>/message/delete/<?= $message['id']; ?>" class="btn btn-danger btn-sm">delete</a>
+        </div>
       </td>
     </tr>
     <?php } } ?>

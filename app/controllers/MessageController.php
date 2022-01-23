@@ -18,6 +18,7 @@ class MessageController extends Controller
 		parent::__construct();
 		$this->model = new Message;
 		Session::init();
+		Session::auth();
 		$data = [];
 	}
 
@@ -38,22 +39,6 @@ class MessageController extends Controller
 			->where('message_id', $id)
 			->get();
 	    return view('message/show', $data);
-	}
-
-	public function store()
-	{
-		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
-		$valid = new Form();
-		$valid->post('name')->required()->length_utf8(0, 255);
-		$valid->post('email')->required()->email()->length_utf8(0, 255);
-		$valid->post('phone')->length_utf8(0, 255);
-		$valid->post('body')->required();
-
-		$valid->submit() ?: redirect('/#submitMessage')->with(['errors' => $valid->errors]);
-
-		$id = $this->model->insert($valid->values, 'id');
-
-		return !$id ?: redirect('/#submitMessage')->with(['success' => 'email has been sent']);
 	}
 
 	public function reply()

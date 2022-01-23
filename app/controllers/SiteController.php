@@ -15,6 +15,7 @@ class SiteController extends Controller
 		parent::__construct();
 		$this->model = new Site;
 		Session::init();
+		Session::auth();
 		$data = [];
 	}
 

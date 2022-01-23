@@ -14,7 +14,7 @@ class Home extends Model
 
 	public function user()
 	{
-		return parent::select('name, email, avatar, info')->table('users')->where('id', 1)->get('single');
+		return parent::table('users')->where('id', 1)->get('single');
 	}
 
 	public function project()

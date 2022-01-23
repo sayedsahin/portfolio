@@ -75,7 +75,7 @@
                     message();
                 ?>
 
-                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                <h1 class="h3 mb-3 fw-normal">Sign in</h1>
 
                 <div class="form-floating">
                     <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" autocomplete="email">

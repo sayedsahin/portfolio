@@ -2,7 +2,7 @@
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5 rounded-circle" src="<?= BASE_URL; ?>/public/assets/img/sayed.jpg" alt="..." />
+        <img class="masthead-avatar mb-5 rounded-circle" src="<?= BASE_URL; ?>/<?= $user['avatar_thumb']; ?>" alt="..." />
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0"><?= $user['name']; ?></h1>
         <!-- Icon Divider-->
@@ -36,7 +36,10 @@
         <!-- Portfolio Grid Items-->
         <div class="row justify-content-center">
             <!-- Portfolio Item 1-->
-            <?php foreach ($projects as $key => $project) { ?>
+            <?php
+                if ($projects) {
+                foreach ($projects as $key => $project) { 
+            ?>
             <div class="col-md-6 col-lg-4 mb-5">
                 <a href="<?= BASE_URL; ?>/home/project/<?= $project['id']; ?>" class="portfolio-item mx-auto border">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
@@ -49,7 +52,7 @@
                     <img class="img-fluid" src="<?= BASE_URL.'/'.$project['thumb']; ?>" alt="..." />
                 </a>
             </div>
-            <?php } ?>
+            <?php } } ?>
         </div>
     </div>
 </section>

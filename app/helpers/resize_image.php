@@ -21,7 +21,7 @@
 		}
 		$ex = explode('.', $file);
 		$ex = end($ex);
-		if ($ex == 'jpg' || $ex == 'jpeg') {
+		if ($ex == 'jpg' || $ex == 'jpeg' || $ex == 'jfif') {
 			$src = imagecreatefromjpeg($file);
 			$dst = imagecreatetruecolor($newwidth, $newheight);
 		}elseif ($ex == 'png') {

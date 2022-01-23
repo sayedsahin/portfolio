@@ -1,6 +1,7 @@
 <?php 
 namespace Controllers;
 
+use Libraries\Form;
 use Models\Home;
 use Systems\Controller;
 use Systems\Session;
@@ -35,6 +36,22 @@ class HomeController extends Controller
 		$data['site'] = $this->model->table('sites')->find(1);
 
 		return view('project/show', $data);
+	}
+
+	public function contact()
+	{
+		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
+		$valid = new Form();
+		$valid->post('name')->required()->length_utf8(0, 255);
+		$valid->post('email')->required()->email()->length_utf8(0, 255);
+		$valid->post('phone')->length_utf8(0, 255);
+		$valid->post('body')->required();
+
+		$valid->submit() ?: redirect('/#submitMessage')->with(['errors' => $valid->errors]);
+
+		$id = $this->model->table('messages')->insert($valid->values, 'id');
+
+		return !$id ?: redirect('/#submitMessage')->with(['success' => 'email has been sent']);
 	}
 }
 ?>

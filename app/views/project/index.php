@@ -8,7 +8,7 @@
     helper(['message']);
     message();
 ?>
-<table class="table table-striped">
+<table class="table table-striped align-baseline">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -31,8 +31,10 @@
         <img style="width: 50px;" src="<?= BASE_URL.'/'.$project['thumb']; ?>" alt="">
       </td>
       <td>
-        <a href="<?= BASE_URL; ?>/project/edit/<?= $project['id']; ?>" class="text-secondary">Edit</a>
-        <a href="<?= BASE_URL; ?>/project/delete/<?= $project['id']; ?>" class="text-danger">delete</a>
+        <div class="d-flex">
+          <a href="<?= BASE_URL; ?>/project/edit/<?= $project['id']; ?>" class="btn btn-dark px-2 py-0 me-1">Edit</a>
+          <a onclick="return confirm('Are you sure?')" href="<?= BASE_URL; ?>/project/delete/<?= $project['id']; ?>" class="btn btn-danger px-2 py-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">Del</a>
+        </div>
       </td>
     </tr>
     <?php } } ?>

@@ -33,7 +33,7 @@
       <td style="width: 24px; height: 24px"><?= $social['icon']; ?></td>
       <td>
         <a class="btn btn-dark btn-sm" href="<?= BASE_URL; ?>/social/edit/<?= $social['id']; ?>" class="text-secondary">Edit</a>
-        <a class="btn btn-danger btn-sm" href="<?= BASE_URL; ?>/social/delete/<?= $social['id']; ?>" class="text-danger">delete</a>
+        <a onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm" href="<?= BASE_URL; ?>/social/delete/<?= $social['id']; ?>" class="text-danger">delete</a>
       </td>
     </tr>
     <?php } } ?>

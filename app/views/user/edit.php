@@ -2,7 +2,7 @@
 <section class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<h3 class="text-center">My Information</h3>
 	<div class="my-3 text-center">
-		<img class="rounded-circle" style="width: 10rem" src="<?= BASE_URL.'/public/assets/img/sayed.jpg' ?>" alt="">
+		<a href="<?= BASE_URL.'/'.$user['avatar'] ?>" target="_blank"><img class="rounded-circle" style="width: 10rem" src="<?= BASE_URL.'/'.$user['avatar_thumb'] ?>" alt=""></a>
 		<?php
 		    helper(['message']);
 		    message();

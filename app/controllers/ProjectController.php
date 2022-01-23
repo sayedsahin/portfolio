@@ -10,11 +10,13 @@ use Systems\Session;
 class ProjectController extends Controller
 {
 	protected object $model;
+	protected int $id;
 	function __construct()
 	{
 		parent::__construct();
 		Session::init();
 		Session::auth();
+		$this->id = Session::get('id');
 		$this->model = new Project();
 		$data = [];
 	}
@@ -88,7 +90,7 @@ class ProjectController extends Controller
 				}
 
 			}
-			$valid->values['user_id'] = 1;
+			$valid->values['user_id'] = $this->id;
 			$id = $this->model->insert($valid->values, 'id');
 			redirect('/project')->with(['success' => 'Project Submited Successfully']);
 		}else {
@@ -162,7 +164,6 @@ class ProjectController extends Controller
 				}
 
 			}
-			$valid->values['user_id'] = 1;
 			$id = $this->model->where('id', $valid->values['id'])->update($valid->values);
 			redirect()->back()->with(['success' => 'Project Updated Successfully']);
 		}else {

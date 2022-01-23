@@ -6,7 +6,7 @@
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?= BASE_URL; ?>/public/css/sidebar.css">
-	<title>Document</title>
+	<title><?= session()->get('name'); ?> - Dashboard</title>
 	<style>
 		#wrapper {overflow-x: hidden;}
 		#sidebar-wrapper {min-height: 100vh;margin-left: -15rem;transition: margin 0.25s ease-out;}
@@ -26,11 +26,11 @@
 		<!-- Sidebar-->
 		<div id="sidebar-wrapper" style="background: #f5f5f5;">
 			<div class="sidebar flex-shrink-0 p-3">
-			<!-- <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-		      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-		      <span class="fs-4">Sayed Sahin</span>
-		  </a> -->
-		  <ul class="list-unstyled ps-0 mt-5" id="navbarToggleExternalContent">
+			<a href="<?= BASE_URL; ?>/dashboard" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none fs-5 fw-bold">
+		      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+		      <span class="fs-4">Dashboard</span>
+		  </a>
+		  <ul class="list-unstyled ps-0" id="navbarToggleExternalContent">
 		  	<li class="mb-1">
 		  		<button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
 		  			Information
@@ -70,8 +70,8 @@
 		  		</button>
 		  		<div class="collapse" id="dashboard-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/message/new" class="link-dark rounded">New</a></li>
 		  				<li><a href="<?= BASE_URL ?>/message" class="link-dark rounded">Inbox</a></li>
+		  				<li><a href="<?= BASE_URL ?>/message/new" class="link-dark rounded">New</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -102,7 +102,11 @@
 				</div>
 				<div>
 					<ul class="navbar-nav mt-2 mt-lg-0">
-						<li class="nav-item active"><a class="nav-link" href="/">Sayed Sahin</a></li>
+						<li class="nav-item active">
+							<a class="nav-link" href="<?= BASE_URL; ?>" target="_blank">Sayed Sahin 
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>
