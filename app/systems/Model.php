@@ -117,14 +117,16 @@ class Model
 
 	public function limit(int $start, int $end=0)
 	{
-		$end = (empty($end)) ? '' : ', '.$end;
-		$this->limit = " LIMIT {$start}{$end}";
+		// $end = (empty($end)) ? '' : ', '.$end;
+		// $this->limit = " LIMIT {$start}{$end}";
+		$this->limit = " LIMIT {$end} OFFSET {$start}";
 		return $this;
 	}
 
 	public function get(string $type='', string $fetch='')
 	{
 		$select = "SELECT {$this->select} FROM {$this->table}{$this->join}{$this->where}{$this->order}{$this->limit}";
+		// pr($select);
 		$query = $this->db->pdo->prepare($select);
 		if (!empty($this->bindValue)) {
 			foreach ($this->bindValue as $k => $v) {
