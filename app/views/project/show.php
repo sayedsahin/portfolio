@@ -22,17 +22,16 @@
                             <div class="divider-custom-line"></div>
                         </div>
                         <!-- Portfolio Modal - Image-->
-                        <!-- <img class="img-fluid rounded mb-5 border" src="<?= BASE_URL; ?>/<?= $project['image']; ?>" alt="..." /> -->
 
                         <div class="w3-container">
                             <div class="w3-mySlides">
-                                <div class="w3-numbertext">1 / 6</div>
+                                <div class="w3-numbertext">1 / <?= !$images ?: count($images)+1; ?></div>
                                 <img class="w-100 border rounded" src="<?= BASE_URL; ?>/<?= $project['image']; ?>">
                             </div>
                             <?php if ($images): ?>
-                            <?php foreach ($images as $key => $image): ?>
+                            <?php $i=1; foreach ($images as $key => $image): $i++; ?>
                             <div class="w3-mySlides">
-                                <div class="w3-numbertext">1 / 6</div>
+                                <div class="w3-numbertext"><?= $i ?> / <?= !$images ?: count($images)+1; ?></div>
                                 <img class="w-100 border rounded" src="<?= BASE_URL; ?>/<?= $image['image']; ?>">
                             </div>
                             <?php endforeach ?>
