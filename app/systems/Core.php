@@ -7,7 +7,7 @@ class Core
 	public string|array $url;
 	public string $controller = "HomeController";
 	public string $method = "index";
-	public string $path = "app/controllers/";
+	public string $path = "app/Controllers/";
 	public object $ctlr;
 	function __construct()
 	{
@@ -29,7 +29,7 @@ class Core
 	public function loadController()
 	{
 		if (!isset($this->url[0])) {
-			$this->ctlr = new \Controllers\Homecontroller();
+			$this->ctlr = new \Controllers\HomeController();
 		}else{
 			$this->controller = ucwords($this->url[0]).'Controller';
 			$file = $this->path.$this->controller.'.php';

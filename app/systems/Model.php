@@ -135,13 +135,34 @@ class Model
 		}
 		$query->execute();
 		$fetch = ($fetch == 'object') ? PDO::FETCH_OBJ : PDO::FETCH_ASSOC ;
-		$row = match ($type) {
+
+		// PHP >= 8.0
+		/*$row = match ($type) {
 			'' => ($query->rowCount() > 0)? $query->fetchAll($fetch) : '',
 			'all' => $query->fetchAll(),
 			'single' => $query->fetch($fetch),
 			'count' => $query->rowCount(),
 			default => '',
-		};
+		};*/
+
+		// PHP < 8.0
+		switch ($type) {
+			case '':
+				$row = ($query->rowCount() > 0)? $query->fetchAll($fetch) : '';
+				break;
+			case 'single':
+				$row = $query->fetch($fetch);
+				break;
+			case 'count':
+				$row = $query->rowCount(); //rowCount Not Working All Database
+				break;
+			case 'all':
+				$row = $query->fetchAll(); //rowCount Not Working All Database
+				break;				
+			default:
+				$row = '';
+				break;
+		}
 		$this->emptyProperty();
 		return !empty($row)?$row:false;
 		
