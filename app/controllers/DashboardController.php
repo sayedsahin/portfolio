@@ -11,7 +11,6 @@ class DashboardController extends Controller
 	private $model;
 	function __construct()
 	{
-		parent::__construct();
 		Session::init();
 		Session::auth();
 		$data = [];

@@ -7,13 +7,13 @@ function view(string $file, array $data = [])
 	if ($data == true) {
 		extract($data);
 	}
-	include 'app/views/'.$file.'.php';
+	include 'app/Views/'.$file.'.php';
 }
 
 function helper(array $helpers = [])
 {
 	foreach ($helpers as $helper) {
-		include_once 'app/helpers/'.$helper.'.php';
+		include_once 'app/Helpers/'.$helper.'.php';
 	}
 }
 function redirect(string $link='')
@@ -45,5 +45,6 @@ function dd($array)
 	echo "<pre>";
 	var_dump($array);
 	echo "</pre>";
+	exit();
 }
 ?>

@@ -11,7 +11,6 @@ class AccountController extends Controller
 	protected object $model;
 	function __construct()
 	{
-		parent::__construct();
 		$this->model = new User;
 		Session::init();
 		$data = [];
