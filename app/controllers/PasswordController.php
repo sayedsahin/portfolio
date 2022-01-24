@@ -13,7 +13,6 @@ class PasswordController extends Controller
 	protected int $id;
 	function __construct()
 	{
-		parent::__construct();
 		Session::init();
 		Session::auth();
 		$this->model = new User;

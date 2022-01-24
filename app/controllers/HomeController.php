@@ -11,7 +11,6 @@ class HomeController extends Controller
 	private $model;
 	function __construct()
 	{
-		parent::__construct();
 		Session::init();
 		$this->model = new Home();
 		$data = [];
@@ -25,7 +24,7 @@ class HomeController extends Controller
 		$data['about'] = $this->model->about();
 		$data['socials'] = $this->model->social();
 		$data['site'] = $this->model->table('sites')->find(1);
-		$this->load->view('index', $data);
+		return view('index', $data);
 	}
 
 	public function project(int $id=0)

@@ -11,7 +11,6 @@ class SocialController extends Controller
 	protected object $model;
 	function __construct()
 	{
-		parent::__construct();
 		$this->model = new Social;
 		Session::init();
 		Session::auth();

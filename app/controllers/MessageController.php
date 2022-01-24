@@ -15,7 +15,6 @@ class MessageController extends Controller
 	protected object $model;
 	function __construct()
 	{
-		parent::__construct();
 		$this->model = new Message;
 		Session::init();
 		Session::auth();

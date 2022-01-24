@@ -12,7 +12,6 @@ class SiteController extends Controller
 
 	function __construct()
 	{
-		parent::__construct();
 		$this->model = new Site;
 		Session::init();
 		Session::auth();

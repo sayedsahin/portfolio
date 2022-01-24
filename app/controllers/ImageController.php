@@ -11,7 +11,6 @@ class ImageController extends Controller
 	protected object $model;
 	function __construct()
 	{
-		parent::__construct();
 		Session::init();
 		Session::auth();
 		$this->model = new Model();

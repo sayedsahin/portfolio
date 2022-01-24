@@ -12,7 +12,6 @@ class UserController extends Controller
 	protected int $id;
 	function __construct()
 	{
-		parent::__construct();
 		$this->model = new User;
 		Session::init();
 		Session::auth();
