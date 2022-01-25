@@ -5,7 +5,7 @@
 	    helper(['message']);
 	    message();
 	?>
-	<form action="<?= BASE_URL; ?>/project/store" method="post" enctype="multipart/form-data">
+	<form action="<?= BASE_URL; ?>/projects/store" method="post" enctype="multipart/form-data">
 		<div class="mb-3">
 			<label for="name" class="form-label">Project Name</label>
 			<input type="text" name="name" placeholder="Project Name" class="form-control" id="name">

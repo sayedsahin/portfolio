@@ -20,11 +20,6 @@ class DashboardController extends Controller
 	{
 		return view('dashboard/index');
 	}
-	
-	public function password()
-	{
-		return view('dashboard/password');
-	}
 
 }
 ?>

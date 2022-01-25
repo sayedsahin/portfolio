@@ -16,7 +16,7 @@ class ImageController extends Controller
 		$this->model = new Model();
 	}
 
-	public function create()
+	public function store()
 	{
 		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit('request error');
 		$id = $this->model->select('id')->table('projects')->find($_POST['id']);

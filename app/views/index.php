@@ -41,7 +41,7 @@
                 foreach ($projects as $key => $project) { 
             ?>
             <div class="col-md-6 col-lg-4 mb-5">
-                <a href="<?= BASE_URL; ?>/home/project/<?= $project['id']; ?>" class="portfolio-item mx-auto border">
+                <a href="<?= BASE_URL; ?>/projects/<?= $project['id']; ?>" class="portfolio-item mx-auto border">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white">
                             <svg style="width: 0.875em; font-size: 3em;">

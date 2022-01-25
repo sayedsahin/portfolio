@@ -34,7 +34,7 @@ class HomeController extends Controller
 		$data['images'] = $this->model->table('project_image')->where('project_id', $id)->get();
 		$data['site'] = $this->model->table('sites')->find(1);
 
-		return view('project/show', $data);
+		view('project/show', $data);
 	}
 
 	public function contact()

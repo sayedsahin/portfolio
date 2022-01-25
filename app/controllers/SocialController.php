@@ -40,7 +40,7 @@ class SocialController extends Controller
 
 		if ($valid->submit()) {
 			$id = $this->model->insert($valid->values, 'id');
-			!$id ?: redirect('/social')->with(['success' => 'Social Icon Submited Successfully']);
+			!$id ?: redirect('/socials')->with(['success' => 'Social Icon Submited Successfully']);
 		}else {
 			redirect()->back()->with(['errors' => $valid->errors]);
 		}
@@ -55,7 +55,7 @@ class SocialController extends Controller
 		]);
 	}
 
-	public function update()
+	public function update(int $id=0)
 	{
 		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
 		$valid = new Form();
@@ -81,6 +81,6 @@ class SocialController extends Controller
 		$social ?: exit('404 not found') ;
 
 		$delete = $this->model->delete($id);
-		!$delete ?: redirect('/social')->with(['success' => 'Social Icon Deleted Successfully']);
+		!$delete ?: redirect('/socials')->with(['success' => 'Social Icon Deleted Successfully']);
 	}
 }

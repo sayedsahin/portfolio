@@ -18,16 +18,11 @@ class AccountController extends Controller
 
 	public function index()
 	{
-		$this->login();
-	}
-
-	public function login()
-	{
 		Session::guest();
 		return view('account/login');
 	}
 
-	public function loginpro()
+	public function login()
 	{
 		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
 		$input = new Form;

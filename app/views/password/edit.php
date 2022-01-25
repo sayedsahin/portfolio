@@ -5,7 +5,7 @@
 	    helper(['message']);
 	    message();
 	?>
-	<form action="<?= BASE_URL; ?>/Password/update" method="post">
+	<form action="<?= BASE_URL; ?>/password/update" method="post">
 		<div class="mb-3">
 			<label for="old-password" class="form-label">Old Password</label>
 			<input type="password" name="old-password" placeholder="Type Your Old Password" class="form-control" id="old-password" autocomplete="current-password">

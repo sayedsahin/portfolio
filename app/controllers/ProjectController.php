@@ -91,7 +91,7 @@ class ProjectController extends Controller
 			}
 			$valid->values['user_id'] = $this->id;
 			$id = $this->model->insert($valid->values, 'id');
-			redirect('/project')->with(['success' => 'Project Submited Successfully']);
+			redirect('/projects')->with(['success' => 'Project Submited Successfully']);
 		}else {
 			redirect()->back()->with(['errors' => $valid->errors]);
 		}
@@ -106,7 +106,7 @@ class ProjectController extends Controller
 		return view('project/edit', $data);
 	}
 
-	public function update()
+	public function update(int $id=0)
 	{
 		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
 		$valid = new Form();
@@ -163,7 +163,7 @@ class ProjectController extends Controller
 				}
 
 			}
-			$id = $this->model->where('id', $valid->values['id'])->update($valid->values);
+			$this->model->where('id', $valid->values['id'])->update($valid->values);
 			redirect()->back()->with(['success' => 'Project Updated Successfully']);
 		}else {
 			redirect()->back()->with(['errors' => $valid->errors]);
@@ -195,6 +195,6 @@ class ProjectController extends Controller
 				unlink($project['thumb']);
 			}
 		}
-		redirect('/project')->with(['success' => 'Project Deleted Successfully']);
+		redirect('/projects')->with(['success' => 'Project Deleted Successfully']);
 	}
 }

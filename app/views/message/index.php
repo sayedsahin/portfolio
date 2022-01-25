@@ -2,7 +2,7 @@
 <div class="bg-light mt-2 p-2 rounded d-flex justify-content-between align-items-baseline" style="border: 1px solid #ebebeb;">
 
     <h5 class="text-black-50">Project List</h5>
-    <!-- <button onclick="window.location.href='<?= BASE_URL ?>/message/create';" class="border px-2 py-1 rounded">New</button> -->
+    <button onclick="window.location.href='<?= BASE_URL ?>/messages/new';" class="border px-2 py-1 rounded">New</button>
 </div>
 <?php message();?>
 <table class="table table-striped">
@@ -32,8 +32,8 @@
       <td><?= time_ago($message['created_at']); ?></td>
       <td>
         <div class="d-flex">
-          <a href="<?= BASE_URL; ?>/message/show/<?= $message['id']; ?>" class="btn btn-outline-dark btn-sm me-1">view</a>
-          <a onclick="return confirm('Are you sure?')" href="<?= BASE_URL; ?>/message/delete/<?= $message['id']; ?>" class="btn btn-danger btn-sm">delete</a>
+          <a href="<?= BASE_URL; ?>/messages/<?= $message['id']; ?>" class="btn btn-outline-dark btn-sm me-1">view</a>
+          <a onclick="return confirm('Are you sure?')" href="<?= BASE_URL; ?>/messages/<?= $message['id']; ?>/delete" class="btn btn-danger btn-sm">delete</a>
         </div>
       </td>
     </tr>

@@ -2,7 +2,7 @@
 <div class="bg-light mt-2 p-2 rounded d-flex justify-content-between align-items-baseline" style="border: 1px solid #ebebeb;">
 
     <h5 class="text-black-50">Social Icon Edit</h5>
-    <button onclick="window.location.href='<?= BASE_URL ?>/social/';" class="border px-2 py-1 rounded">Back</button>
+    <button onclick="window.location.href='<?= BASE_URL ?>/socials';" class="border px-2 py-1 rounded">Back</button>
 </div>
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<!-- <h3>Edit social icon</h3> -->
@@ -11,7 +11,7 @@
 	    helper(['message']);
 	    message();
 	?>
-	<form action="<?= BASE_URL; ?>/social/update" method="post">
+	<form action="<?= BASE_URL; ?>/socials/<?= $social['id']; ?>/edit" method="post">
 		<input type="hidden" name="id" value="<?= $social['id']; ?>">
 		<div class="mb-3">
 			<label for="name" class="form-label">Social Name*</label>

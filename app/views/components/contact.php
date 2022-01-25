@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-lg-8 col-xl-7">
-        <form id="contactForm" method="post" action="<?= BASE_URL; ?>/home/contact">
+        <form id="contactForm" method="post" action="<?= BASE_URL; ?>/contact">
             <!-- Name input-->
             <div class="form-floating mb-3">
                 <input name="name" class="form-control" id="name" type="text" placeholder="Enter your name..." required />

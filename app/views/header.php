@@ -43,7 +43,7 @@
                         </li>
                         <?php else: ?>
                         <li class="nav-item mx-0 mx-lg-1">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= BASE_URL ?>/account">Login</a>
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="<?= BASE_URL ?>/login">Login</a>
                         </li>
                         <?php endif ?>
                     </ul>

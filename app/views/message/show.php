@@ -34,7 +34,7 @@ Phone: <?= $message['phone']; ?>
 	</div>
 	<?php endforeach ?>
 	<?php endif ?>
-	<form action="<?= BASE_URL; ?>/message/reply" method="post" class="mt-3">
+	<form action="<?= BASE_URL; ?>/messages/reply" method="post" class="mt-3">
 		<div class="mb-3">
 			<input type="hidden" name="message_id" value="<?= $message['id'] ?>">
 			<input type="hidden" name="name" value="<?= $message['name'] ?>">

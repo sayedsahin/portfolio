@@ -5,7 +5,7 @@
 	    helper(['message']);
 	    message();
 	?>
-	<form action="<?= BASE_URL; ?>/social/store" method="post">
+	<form action="<?= BASE_URL; ?>/socials/create" method="post">
 		<div class="mb-3">
 			<label for="name" class="form-label">Name</label>
 			<input type="text" name="name" placeholder="Project Name" class="form-control" id="name">

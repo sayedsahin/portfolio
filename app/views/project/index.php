@@ -2,7 +2,7 @@
 <div class="bg-light mt-2 p-2 rounded d-flex justify-content-between align-items-baseline" style="border: 1px solid #ebebeb;">
 
     <h5 class="text-black-50">Project List</h5>
-    <button onclick="window.location.href='<?= BASE_URL ?>/project/create';" class="border px-2 py-1 rounded">New</button>
+    <button onclick="window.location.href='<?= BASE_URL ?>/projects/create';" class="border px-2 py-1 rounded">New</button>
 </div>
 <?php
     helper(['message']);
@@ -25,15 +25,15 @@
     ?>
     <tr>
       <th scope="row"><?= $project['id']; ?></th>
-      <td><a class="fw-bold text-secondary" href="<?= BASE_URL; ?>/project/show/<?= $project['id']; ?>"><?= $project['name']; ?></a></td>
+      <td><a class="fw-bold text-secondary" href="<?= BASE_URL; ?>/projects/<?= $project['id']; ?>/show"><?= $project['name']; ?></a></td>
       <td><?= $project['description']; ?></td>
       <td>
         <img style="width: 50px;" src="<?= BASE_URL.'/'.$project['thumb']; ?>" alt="">
       </td>
       <td>
         <div class="d-flex">
-          <a href="<?= BASE_URL; ?>/project/edit/<?= $project['id']; ?>" class="btn btn-dark px-2 py-0 me-1">Edit</a>
-          <a onclick="return confirm('Are you sure?')" href="<?= BASE_URL; ?>/project/delete/<?= $project['id']; ?>" class="btn btn-danger px-2 py-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">Del</a>
+          <a href="<?= BASE_URL; ?>/projects/<?= $project['id']; ?>/edit" class="btn btn-dark px-2 py-0 me-1">Edit</a>
+          <a onclick="return confirm('Are you sure?')" href="<?= BASE_URL; ?>/projects/<?= $project['id']; ?>/delete" class="btn btn-danger px-2 py-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">Del</a>
         </div>
       </td>
     </tr>

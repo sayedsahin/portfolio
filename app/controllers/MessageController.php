@@ -25,7 +25,7 @@ class MessageController extends Controller
 	{
 		helper(['message', 'text', 'time']);
 		return view('message/index', [
-			'messages' => $this->model->limit(100)->order('id DESC')->get(),
+			'messages' => $this->model->limit(0, 100)->order('id DESC')->get(),
 		]);
 
 	}
@@ -59,7 +59,7 @@ class MessageController extends Controller
 		$id = !$id ?: $this->email($valid->values);
 
 		!$id ?: Session::set('message', ['success' => 'Reply Has Been Sent']);
-		exit('<script>window.location.href = "/message/show/'.$valid->values['message_id'].'"</script>');
+		exit('<script>window.location.href = "/messages/'.$valid->values['message_id'].'"</script>');
 	}
 
 	public function delete(int $id=0)
@@ -68,7 +68,7 @@ class MessageController extends Controller
 		$message ?: exit('404 not found') ;
 
 		$delete = $this->model->delete($id);
-		!$delete ?: redirect('/message')->with(['success' => 'message has been deleted']);
+		!$delete ?: redirect('/messages')->with(['success' => 'message has been deleted']);
 	}
 
 	public function new()
@@ -91,7 +91,7 @@ class MessageController extends Controller
 		$email = $this->email($valid->values);
 
 		!$email ?: Session::set('message', ['success' => 'Mail Has Been Sent']);
-		exit('<script>window.location.href = "/message/new"</script>');
+		exit('<script>window.location.href = "/messages/new"</script>');
 	}
 
 	public function email(array $data)

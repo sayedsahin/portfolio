@@ -10,7 +10,7 @@
 	    helper(['message']);
 	    message();
 	?>
-	<form action="<?= BASE_URL; ?>/site/update" method="post">
+	<form action="<?= BASE_URL; ?>/site" method="post">
 		<div class="mb-3">
 			<label for="title" class="form-label">Title*</label>
 			<input type="text" name="title" value="<?= $site['title'] ?>" placeholder="Title...." class="form-control" id="title">

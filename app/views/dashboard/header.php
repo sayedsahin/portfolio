@@ -37,8 +37,8 @@
 		  		</button>
 		  		<div class="collapse" id="home-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/user/edit" class="link-dark rounded">My Info</a></li>
-		  				<li><a href="<?= BASE_URL ?>/site/edit" class="link-dark rounded">Site Info</a></li>
+		  				<li><a href="<?= BASE_URL ?>/user" class="link-dark rounded">My Info</a></li>
+		  				<li><a href="<?= BASE_URL ?>/site" class="link-dark rounded">Site Info</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -48,8 +48,8 @@
 		  		</button>
 		  		<div class="collapse" id="project-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/project" class="link-dark rounded">Project List</a></li>
-		  				<li><a href="<?= BASE_URL ?>/project/create" class="link-dark rounded">Project Add</a></li>
+		  				<li><a href="<?= BASE_URL ?>/projects" class="link-dark rounded">Project List</a></li>
+		  				<li><a href="<?= BASE_URL ?>/projects/create" class="link-dark rounded">Project Add</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -59,8 +59,8 @@
 		  		</button>
 		  		<div class="collapse" id="message-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/social" class="link-dark rounded">Social List</a></li>
-		  				<li><a href="<?= BASE_URL ?>/social/create" class="link-dark rounded">Add Social</a></li>
+		  				<li><a href="<?= BASE_URL ?>/socials" class="link-dark rounded">Social List</a></li>
+		  				<li><a href="<?= BASE_URL ?>/socials/create" class="link-dark rounded">Add Social</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -70,8 +70,8 @@
 		  		</button>
 		  		<div class="collapse" id="dashboard-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/message" class="link-dark rounded">Inbox</a></li>
-		  				<li><a href="<?= BASE_URL ?>/message/new" class="link-dark rounded">New</a></li>
+		  				<li><a href="<?= BASE_URL ?>/messages" class="link-dark rounded">Inbox</a></li>
+		  				<li><a href="<?= BASE_URL ?>/messages/new" class="link-dark rounded">New</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
@@ -82,8 +82,8 @@
 		  		</button>
 		  		<div class="collapse" id="account-collapse" style="">
 		  			<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-		  				<li><a href="<?= BASE_URL ?>/password/edit" class="link-dark rounded">Change Password</a></li>
-		  				<li><a href="<?= BASE_URL; ?>/account/logout" class="link-dark rounded">Sign out</a></li>
+		  				<li><a href="<?= BASE_URL ?>/password" class="link-dark rounded">Change Password</a></li>
+		  				<li><a href="<?= BASE_URL; ?>/logout" class="link-dark rounded">Sign out</a></li>
 		  			</ul>
 		  		</div>
 		  	</li>
