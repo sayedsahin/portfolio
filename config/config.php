@@ -1,7 +1,7 @@
 <?php
 
 	define('BASE_URL', $_ENV['BASE_URL']);
-	
+	define('DEBUG_MODE', true);
 	define("DB_CONNECTION", $_ENV['DB_CONNECTION']);
 	define("DB_HOST", $_ENV['DB_HOST']);
 	define("DB_PORT", $_ENV['DB_PORT']);

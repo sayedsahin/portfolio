@@ -1,11 +1,14 @@
 <?php
 
-use Symfony\Component\Dotenv\Dotenv;
 require_once __DIR__.'/vendor/autoload.php';
 
-$dotenv = new Dotenv();
+$dotenv = new \Symfony\Component\Dotenv\Dotenv();
 $dotenv->load(__DIR__.'/.env');
 
-require_once 'config/config.php';
-include_once 'app/Systems/Utility.php';
-$main = new \Systems\Core();
+require_once __DIR__.'/config/config.php';
+include_once __DIR__.'/app/Systems/Utility.php';
+// $d = (bool) IS_DEBUG;
+// dd($d);
+include_once __DIR__.'/app/Systems/Route.php';
+
+// $main = new \Systems\Core();
