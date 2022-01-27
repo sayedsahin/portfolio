@@ -26,7 +26,7 @@ class Session{
 		if (self::get("login") == false) {
 			self::destroy();
 			if (!isAjax()) {
-				header("Location:".BASE_URL."/account/login");
+				header("Location:".BASE_URL."/login");
 			}else{
 				echo "login";
 			}
@@ -45,7 +45,7 @@ class Session{
 	{
 		self::init();
 		if (self::get("level") != 1) {
-			header("Location:".BASE_URL."/Admin");
+			header("Location:".BASE_URL."/dashboard");
 			exit();
 		}
 	}
@@ -53,7 +53,7 @@ class Session{
 	{
 		self::init();
 		if (self::get("level") != 1 && self::get("level") != 2) {
-			header("Location:".BASE_URL."/Admin");
+			header("Location:".BASE_URL."/dashboard");
 			exit();
 		}
 	}

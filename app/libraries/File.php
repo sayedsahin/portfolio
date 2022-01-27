@@ -1,7 +1,7 @@
 <?php 
-/**
- * File Validation
- */
+
+namespace Libraries;
+
 class File
 {
 	

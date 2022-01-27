@@ -1,5 +1,7 @@
 <?php 
 
+namespace Libraries;
+
 use Systems\Session;
 class Helper
 {

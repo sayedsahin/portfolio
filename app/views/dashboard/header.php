@@ -3,10 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><?= session()->get('name'); ?> - Dashboard</title>
+	<link rel="icon" type="image/svg+xml" href="<?= BASE_URL; ?>/public/assets/favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="<?= BASE_URL; ?>/public/assets/favicon.png" />
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?= BASE_URL; ?>/public/css/sidebar.css">
-	<title><?= session()->get('name'); ?> - Dashboard</title>
 	<style>
 		#wrapper {overflow-x: hidden;}
 		#sidebar-wrapper {min-height: 100vh;margin-left: -15rem;transition: margin 0.25s ease-out;}
