@@ -1,12 +1,12 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 
 $dotenv = new \Symfony\Component\Dotenv\Dotenv();
-$dotenv->load('.env');
+$dotenv->load(__DIR__.'/.env');
 
-require_once 'config/config.php';
-include_once 'app/Systems/Utility.php';
-include_once 'app/Systems/Route.php';
+require_once __DIR__.'/config/config.php';
+include_once __DIR__.'/app/Systems/Utility.php';
+include_once __DIR__.'/app/Systems/Route.php';
 
 // $main = new \Systems\Core();
