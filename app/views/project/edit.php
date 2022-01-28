@@ -1,10 +1,15 @@
 <?php view('dashboard/header'); ?>
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
-	<h3>Edit project</h3>
+	<div class="bg-light mt-2 p-2 rounded d-flex justify-content-between align-items-baseline" style="border: 1px solid #ebebeb;">
+	    <button onclick="window.location.href='<?= BASE_URL ?>/projects';" class="border px-1 py-0 rounded">&larr;Back</button>
+		<h3>Edit project</h3>
+	    <button onclick="window.location.href='<?= BASE_URL ?>/projects/<?= $project['id']; ?>';" class="border px-1 py-0 rounded">view</button>
+	</div>
 	<?php
 	    helper(['message']);
 	    message();
 	?>
+	
 	<form action="<?= BASE_URL; ?>/projects/<?= $project['id']; ?>/update" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="id" value="<?= $project['id']; ?>">
 		<div class="mb-3">
@@ -35,11 +40,14 @@
 		<input type="hidden" name="id" value="<?= $project['id']; ?>">
 		<div class="mb-3">
 			<label for="image" class="form-label">Upload More Image</label>
+			<style>
+				.height-fit { object-fit: cover; max-height: 90px;}
+			</style>
 			<div class="row">
 				<?php if ($images): ?>
 				<?php foreach ($images as $key => $image): ?>
-				<div class="col-3">
-					<img class="rounded-2 border mx-1 w-100" src="<?= BASE_URL ?>/<?= $image['image'] ?>" alt="">
+				<div class="col-auto">
+					<img class="rounded-2 border mx-1 w-100 height-fit" src="<?= BASE_URL ?>/<?= $image['image'] ?>" alt="">
 					<a class="d-block text-center" href="<?= BASE_URL ?>/projects/image/<?= $image['id'] ?>/delete">remove</a>
 				</div>
 				<?php endforeach; ?>

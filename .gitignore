@@ -1,7 +1,7 @@
 *.mp3
 *.pdf
 *.zip
-# .env
+.env
 # /public
 /store
 /vendor

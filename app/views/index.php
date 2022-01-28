@@ -17,12 +17,15 @@
         </div>
         <!-- Masthead Subheading-->
         <p class="masthead-subheading font-weight-light mb-0"><?= $user['info']; ?></p>
+        
     </div>
 </header>
-<section class="page-section portfolio" id="portfolio">
+
+<section class="page-section portfolio">
     <div class="container">
+        
         <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+        <h2 id="portfolio" class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
@@ -96,5 +99,15 @@
         <!-- Contact Section Form-->
         <?php view('components/contact'); ?>
     </div>
+</section>
+<section class="page-section portfolio pt-0">
+    <!-- <div class="container"> -->
+        <div class="row">
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/php.svg" alt=""></div>
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/vuejs.svg" alt=""></div>
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/laravel.svg" alt=""></div>
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/nuxtjs.svg" alt=""></div>
+        </div>
+    <!-- </div> -->
 </section>
 <?php view('footer', ['socials' => $socials, 'site' => $site]); ?>
