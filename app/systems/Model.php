@@ -3,7 +3,7 @@
 namespace Systems;
 use PDO;
 
-class Model
+class Model extends Database
 {
 	protected object $db;
 	protected array $bindValue = [];
