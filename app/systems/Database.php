@@ -5,7 +5,7 @@ use PDO;
 
 class Database
 {
-	public object $pdo;
+	protected object $pdo;
 	function __construct()
 	{
 		if (!isset($this->pdo)) {
@@ -14,8 +14,8 @@ class Database
 				$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$connection->exec("SET CHARACTER SET utf8");
 				$this->pdo = $connection;
-			} catch (PDOException $e) {
-				die("Failed to connect with Database".$e->getMessage());
+			} catch (\PDOException $e) {
+				die("Connection failed:  ".$e->getMessage());
 			}
 		}
 	}	
