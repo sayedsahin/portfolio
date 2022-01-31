@@ -5,7 +5,7 @@ use PDO;
 
 class Database
 {
-	protected object $pdo;
+	public object $pdo;
 	function __construct()
 	{
 		if (!isset($this->pdo)) {

@@ -3,7 +3,7 @@
 namespace Systems;
 use PDO;
 
-class Model extends Database
+class Model
 {
 	protected object $db;
 	protected array $bindValue = [];
@@ -17,6 +17,7 @@ class Model extends Database
 	function __construct()
 	{
 		$this->db = new Database();
+		// $this->db = Singleton::getInstance();
 	}
 
 	public function select(string $data)
