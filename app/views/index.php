@@ -102,7 +102,7 @@
 </section>
 <section class="page-section portfolio pt-0">
     <!-- <div class="container"> -->
-        <div class="row">
+        <div class="d-flex">
             <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/php.svg" alt=""></div>
             <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/vuejs.svg" alt=""></div>
             <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/laravel.svg" alt=""></div>
