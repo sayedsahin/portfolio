@@ -2,7 +2,6 @@
 *.pdf
 *.zip
 .env
-/public/css/styles-org.css
 # /public
 /store
 /vendor
