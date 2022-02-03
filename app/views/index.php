@@ -76,8 +76,8 @@
         </div>
         <!-- About Section Content-->
         <div class="row">
-            <div class="col-lg-4 ms-auto"><p class="lead"><?= $about['about_1'] ?></p></div>
-            <div class="col-lg-4 me-auto"><p class="lead"><?= $about['about_2'] ?></p></div>
+            <div class="col-lg-4 ms-auto"><p class="lead"><?= htmlspecialchars_decode($about['about_1']) ?></p></div>
+            <div class="col-lg-4 me-auto"><p class="lead"><?= htmlspecialchars_decode($about['about_2']) ?></p></div>
         </div>
     </div>
 </section>

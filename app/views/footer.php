@@ -24,7 +24,7 @@
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">Credit</h4>
-                        <p class="lead mb-0"><?= $site['credit'] ?></p>
+                        <p class="lead mb-0"><?= htmlspecialchars_decode($site['credit']) ?></p>
                     </div>
                 </div>
             </div>
