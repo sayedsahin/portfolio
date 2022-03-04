@@ -8,6 +8,7 @@ use Controllers\MessageController;
 use Controllers\PasswordController;
 use Controllers\ProjectController;
 use Controllers\SiteController;
+use Controllers\SitemapController;
 use Controllers\SocialController;
 use Controllers\UserController;
 
@@ -66,3 +67,6 @@ $route->get('/messages/{id:\d+}/delete', [MessageController::class, 'delete']);
 $route->get('/login', [AccountController::class, 'index']);
 $route->post('/login', [AccountController::class, 'login']);
 $route->get('/logout', [AccountController::class, 'logout']);
+
+// Seo File
+$route->get('/sitemap.xml', [SitemapController::class, 'index']);
