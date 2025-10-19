@@ -48,7 +48,7 @@ class ProjectController extends Controller
 		$valid->post('name')->required()->length(3, 100);
 		$valid->post('source')->length(0, 250);
 		$valid->post('preview')->length(0, 250);
-		$valid->post('description')->length(0, 1000);
+		$valid->post('description')->length(0, 10000);
 		if ($valid->submit()) {
 			if (!empty($_FILES['image']['name'])) {
 				$file_name = $_FILES['image']['name'];
@@ -114,7 +114,7 @@ class ProjectController extends Controller
 		$valid->post('name')->required()->length(3, 100);
 		$valid->post('source')->length(0, 250);
 		$valid->post('preview')->length(0, 250);
-		$valid->post('description')->length(0, 1000);
+		$valid->post('description')->length(0, 10000);
 		if ($valid->submit()) {
 			if (!empty($_FILES['image']['name'])) {
 				$file_name = $_FILES['image']['name'];
