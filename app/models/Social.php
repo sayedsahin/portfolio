@@ -1,16 +1,8 @@
 <?php 
+namespace App\Models;
+use App\Systems\QueryBuilder;
 
-namespace Models;
-
-use Systems\Model;
-
-class Social extends Model
+class Social extends QueryBuilder
 {
-	protected string $table = 'socials';
-
-	function __construct()
-	{
-		parent::__construct();
-	}
+	protected string $defaultTable = 'socials';
 }
- ?>

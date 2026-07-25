@@ -1,14 +1,8 @@
 <?php 
-namespace Models;
-use Systems\Model;
+namespace App\Models;
+use App\Systems\QueryBuilder;
 
-class Site extends Model
+class Site extends QueryBuilder
 {
-	// $table use one function one time. 2nd time not working
-	protected string $table = 'sites';
-
-	function __construct()
-	{
-		parent::__construct();
-	}
+	protected string $defaultTable = 'sites';
 }

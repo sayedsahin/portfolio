@@ -1,25 +1,18 @@
 <?php 
-namespace Models;
-use Systems\Model;
+namespace App\Models;
+use App\Systems\QueryBuilder;
 
-class Project extends Model
+class Project extends QueryBuilder
 {
-	// $table use one function one time. 2nd time not working
-	protected string $table = 'projects';
-
-	function __construct()
-	{
-		parent::__construct();
-		
-	}
+	protected string $defaultTable = 'projects';
 
 	public function socials()
 	{
-		return parent::select('icon, link')->table('socials')->get();
+		return $this->select('icon, link')->table('socials')->get();
 	}
 
 	public function project($id)
 	{
-		return parent::find($id);
+		return $this->find($id);
 	}
 }

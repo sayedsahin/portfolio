@@ -1,10 +1,10 @@
 <?php 
-namespace Controllers;
+namespace App\Controllers;
 
-use Libraries\Form;
-use Models\Site;
-use Systems\Controller;
-use Systems\Session;
+use App\Validation\Validator;
+use App\Models\Site;
+use App\Systems\Session\Session;
+use App\Middlewares\Authenticated;
 
 class SiteController extends Controller
 {
@@ -13,35 +13,38 @@ class SiteController extends Controller
 	function __construct()
 	{
 		$this->model = new Site;
-		Session::init();
-		Session::auth();
-		$data = [];
+		$this->middleware(Authenticated::class);
 	}
 
 	public function edit()
 	{
-		return view('site/edit', [
+		return view('site.edit', [
 			'site' => $this->model->find(1),
 		]);
 	}
 
 	public function update()
 	{
-		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
-		$valid = new Form();
-		$valid->post('title')->required()->length(0, 255);
-		$valid->post('tagline')->length(0, 255);
-		$valid->post('location')->length(0, 255);
-		$valid->post('copyright')->length(0, 255);
-		$valid->post('description')->length(0, 5000);
-		$valid->post('credit')->length(0, 1000);
+		$request = request();
+		try {
+			$data = Validator::make($request->all())
+				->required(['title'])
+				->validated();
+		} catch (\App\Validation\ValidationException $e) {
+			return response()->redirect()->with(['errors' => $e->errors()])->back();
+		}
 
-		$valid->values['copyright'] = $_POST['copyright'];
+		$data['tagline'] = $request->input('tagline') ?? '';
+		$data['location'] = $request->input('location') ?? '';
+		$data['copyright'] = $request->input('copyright') ?? '';
+		$data['description'] = $request->input('description') ?? '';
+		$data['credit'] = $request->input('credit') ?? '';
 
-		$valid->submit() ?: redirect()->back()->with(['errors' => $valid->errors]);
-
-		$update = $this->model->where('id', 1)
-			->update($valid->values);
-		!$update ?: redirect()->back()->with(['success' => 'site information updated successfully']);
+		$update = $this->model->where('id', 1)->update($data);
+		
+		if ($update) {
+		    return response()->redirect()->with(['success' => 'site information updated successfully'])->back();
+		}
+		return response()->redirect()->back();
 	}
 }

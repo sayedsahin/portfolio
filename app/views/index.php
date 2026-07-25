@@ -1,10 +1,10 @@
-<?php view('header', ['site' => $site]); ?>
+<?php ob_start(); ?>
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5 rounded-circle" src="<?= BASE_URL; ?>/<?= $user['avatar_thumb']; ?>" alt="..." />
+        <img class="masthead-avatar mb-5 rounded-circle" src="<?= BASE_URL; ?>/<?= $user->avatar_thumb; ?>" alt="..." />
         <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0"><?= $user['name']; ?></h1>
+        <h1 class="masthead-heading text-uppercase mb-0"><?= $user->name; ?></h1>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
@@ -16,7 +16,7 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0"><?= $user['info']; ?></p>
+        <p class="masthead-subheading font-weight-light mb-0"><?= $user->info; ?></p>
         
     </div>
 </header>
@@ -44,7 +44,7 @@
                 foreach ($projects as $key => $project) { 
             ?>
             <div class="col-md-6 col-lg-4 mb-5">
-                <a href="<?= BASE_URL; ?>/projects/<?= $project['id']; ?>" class="portfolio-item mx-auto border">
+                <a href="<?= BASE_URL; ?>/projects/<?= $project->id; ?>" class="portfolio-item mx-auto border">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white">
                             <svg style="width: 0.875em; font-size: 3em;">
@@ -52,7 +52,7 @@
                             </svg>
                         </div>
                     </div>
-                    <img class="img-fluid" src="<?= BASE_URL.'/'.$project['thumb']; ?>" alt="..." />
+                    <img class="img-fluid" src="<?= BASE_URL.'/'.$project->thumb; ?>" alt="..." />
                 </a>
             </div>
             <?php } } ?>
@@ -76,8 +76,8 @@
         </div>
         <!-- About Section Content-->
         <div class="row">
-            <div class="col-lg-4 ms-auto"><p class="lead"><?= htmlspecialchars_decode($about['about_1']) ?></p></div>
-            <div class="col-lg-4 me-auto"><p class="lead"><?= htmlspecialchars_decode($about['about_2']) ?></p></div>
+            <div class="col-lg-4 ms-auto"><p class="lead"><?= htmlspecialchars_decode($about->about_1) ?></p></div>
+            <div class="col-lg-4 me-auto"><p class="lead"><?= htmlspecialchars_decode($about->about_2) ?></p></div>
         </div>
     </div>
 </section>
@@ -96,18 +96,19 @@
             </div>
             <div class="divider-custom-line"></div>
         </div>
-        <!-- Contact Section Form-->
-        <?php view('components/contact'); ?>
+        <!-- Contact Section Form -->
+        <?php view('components.contact'); ?>
     </div>
-</section>
+<!-- </section> -->
 <section class="page-section portfolio pt-0">
     <!-- <div class="container"> -->
         <div class="d-flex">
-            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/php.svg" alt=""></div>
-            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/vuejs.svg" alt=""></div>
-            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/laravel.svg" alt=""></div>
-            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/public/assets/nuxtjs.svg" alt=""></div>
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/assets/php.svg" alt=""></div>
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/assets/vuejs.svg" alt=""></div>
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/assets/laravel.svg" alt=""></div>
+            <div class="col-3"><img class="w-100" style="height: 60px;" src="<?= BASE_URL; ?>/assets/nuxtjs.svg" alt=""></div>
         </div>
     <!-- </div> -->
 </section>
-<?php view('footer', ['socials' => $socials, 'site' => $site]); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require view_path('layout.frontend'); ?>

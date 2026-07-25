@@ -1,25 +1,19 @@
 <?php 
-namespace Controllers;
+namespace App\Controllers;
 
-use Models\Home;
-use Systems\Session;
-use Systems\Controller;
-use Systems\Model;
+use App\Middlewares\Authenticated;
 
 class DashboardController extends Controller
 {
 	private $model;
 	function __construct()
 	{
-		Session::init();
-		Session::auth();
+		$this->middleware(Authenticated::class);
 		$data = [];
 	}
 
 	public function index()
 	{
-		return view('dashboard/index');
+		return view('dashboard.index');
 	}
-
 }
-?>

@@ -1,11 +1,10 @@
 <?php
+namespace App\Controllers;
 
-namespace Controllers;
-
-use Libraries\Form;
-use Models\User;
-use Systems\Controller;
-use Systems\Session;
+use App\Validation\Validator;
+use App\Models\User;
+use App\Systems\Session\Session;
+use App\Middlewares\Authenticated;
 
 class PasswordController extends Controller
 {
@@ -13,52 +12,58 @@ class PasswordController extends Controller
 	protected int $id;
 	function __construct()
 	{
-		Session::init();
-		Session::auth();
+		$this->middleware(Authenticated::class);
 		$this->model = new User;
-		$this->id = Session::get('id');
-		$data = [];
+		$this->id = Session::get('auth_user_id');
 	}
 
 	public function edit()
 	{
-		return view('password/edit');
+		return view('password.edit');
 	}
 
 	public function update()
 	{
-		// $this->checkUserId($id);
-		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
-		$input = new Form;
-		$input->post('old-password')->required();
-		$input->post('password')->required()->length(6, 100);
-		$input->post('confirm-password')->required();
+		$request = request();
+		try {
+			$data = Validator::make($request->all())
+				->required(['old-password', 'password', 'confirm-password'])
+				->min('password', 6)
+				->validated();
+		} catch (\App\Validation\ValidationException $e) {
+			return response()->redirect()->with(['errors' => $e->errors()])->back();
+		}
+
+		$oldPassword = $data['old-password'];
+		$newPassword = $data['password'];
+		$renewPassword = $data['confirm-password'];
+
+		if ($newPassword !== $renewPassword) {
+		    return response()->redirect()->with(['error' => 'password confirm does not match'])->back();
+		}
+		if ($oldPassword === $newPassword) {
+		    return response()->redirect()->with(['error' => 'old-password and new-password is same'])->back();
+		}
 		
-		$input->submit() ?: exit(redirect()->back()->with(['errors' => $input->errors]));
 
+		$user = $this->model->select('id', 'email', 'password')->where('id', $this->id)
+			->first();
+		if (!$user || !password_verify($oldPassword, $user->password)) {
+			return response()
+				->redirect()
+				->with(['error' => 'Incorrect User or Password'])
+				->back();
+		}
 
-		$oldpassword = $input->values['old-password'];
-		$newpassword = $input->values['password'];
-		$renewpassword = $input->values['confirm-password'];
-
-		$newpassword === $renewpassword ?: exit(redirect()->back()->with(['error' => 'password confirm does not match']));
-		$oldpassword !== $newpassword ?: exit(redirect()->back()->with(['error' => 'old-password and new-passowrd is same']));
-
-
-		$user = $this->model->where('id', $this->id)
-			->where('password', md5($oldpassword))
-			->get('count');
-
-		$user ?: exit(redirect()->back()->with(['error' => 'Incorrect Old Password']));
-
+		$newPassword = $password = password_hash($newPassword, PASSWORD_DEFAULT);
 		$update = $this->model->where('id', $this->id)->update([
-			'password' => md5($newpassword),
+			'password' => $newPassword,
 		]);
 
 		if ($update) {
-			return redirect()->back()->with(['success' => 'password updated successfully']);
-		}else{
-			return redirect()->back()->with(['error' => 'Error ! Password Not Updated']);
+			return response()->redirect()->with(['success' => 'password updated successfully'])->back();
+		} else {
+			return response()->redirect()->with(['error' => 'Error ! Password Not Updated'])->back();
 		}
 	}
 }

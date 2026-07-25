@@ -1,3 +1,6 @@
-<?php view('dashboard/header') ?>
+<?php ob_start(); ?>
 <h1>Dashboard</h1>
-<?php view('dashboard/footer') ?>
+<!-- Page-specific scripts can go here -->
+<?php $content = ob_get_clean(); ?>
+
+<?php require view_path('layout.dashboard'); ?>

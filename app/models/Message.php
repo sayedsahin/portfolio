@@ -1,13 +1,8 @@
 <?php 
-namespace Models;
-use Systems\Model;
+namespace App\Models;
+use App\Systems\QueryBuilder;
 
-class Message extends Model
+class Message extends QueryBuilder
 {
-	protected string $table = 'messages';
-
-	function __construct()
-	{
-		parent::__construct();
-	}
+	protected string $defaultTable = 'messages';
 }

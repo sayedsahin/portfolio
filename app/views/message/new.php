@@ -1,8 +1,9 @@
-<?php view('dashboard/header'); ?>
+<?php ob_start(); ?>
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<h3>Send a new email</h3>
-	<?php message(); ?>
+	<?php show_flash(); ?>
 	<form action="<?= BASE_URL; ?>/messages/new" method="post">
+		<?= csrf_field() ?>
 		<div class="mb-3">
 			<label for="email" class="form-label">To (email)</label>
 			<input type="text" name="email" placeholder="jondoe@example.com" class="form-control" id="email">
@@ -18,4 +19,5 @@
 		<button type="submit" name="newemail" class="btn btn-secondary">Send</button>
 	</form>
 </section>
-<?php view('dashboard/footer'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require view_path('layout.dashboard'); ?>

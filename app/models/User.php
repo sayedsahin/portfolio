@@ -1,16 +1,12 @@
 <?php 
-namespace Models;
-use Systems\Model;
+namespace App\Models;
 
-class User extends Model
+use App\Systems\QueryBuilder;
+
+class User extends QueryBuilder
 {
-	// $table use one function one time. 2nd time not working
-	protected string $table = 'users';
+	// protected ?string $defaultConnection = 'sqlite';
+	protected string $defaultTable = 'users';
+	protected array $defaultSelect = ['id', 'name', 'username', 'email'];
 
-	function __construct()
-	{
-		parent::__construct();
-		
-	}
 }
-?>

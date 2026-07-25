@@ -1,134 +1,130 @@
 <?php 
-namespace Controllers;
+namespace App\Controllers;
 
-use Libraries\Form;
-use Models\Message;
+use App\Validation\Validator;
+use App\Models\Message;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\isHTML;
-use Systems\Controller;
-use Systems\Session;
+use App\Systems\Session\Session;
+use App\Middlewares\Authenticated;
 
 class MessageController extends Controller
 {
 	protected object $model;
 	function __construct()
 	{
-		$this->model = new Message;
-		Session::init();
-		Session::auth();
-		$data = [];
+		$this->middleware(Authenticated::class);
 	}
 
 	public function index()
 	{
-		helper(['message', 'text', 'time']);
-		return view('message/index', [
-			'messages' => $this->model->limit(0, 100)->order('id DESC')->get(),
+		$messages = Message::query()->limit(100, 0)->order('id DESC')->get();
+		// dd($messages);
+		return view('message.index', [
+			'messages' => $messages,
 		]);
-
 	}
 
 	public function show($id=0)
 	{
-		helper(['time', 'message', 'text']);
-		$data['message'] = $this->model->find($id);
-		$data['replies'] = $this->model->table('replies')
+		// helper(['time', 'message', 'text']);
+		$data['message'] = Message::query()->find($id);
+		$data['replies'] = Message::query()->table('replies')
 			->where('message_id', $id)
 			->get();
-	    return view('message/show', $data);
+	    return view('message.show', $data);
 	}
 
 	public function reply()
 	{
-	    $_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
-		$valid = new Form();
-		$valid->post('message_id')->required();
-		$valid->post('body')->required();
-		$valid->post('name')->required();
-		$valid->post('email')->required()->email();
-		$valid->post('subject');
+		$request = request();
+		try {
+			$data = Validator::make($request->all())
+				->required(['message_id', 'body', 'name', 'email'])
+				->email('email')
+				->validated();
+		} catch (\App\Validation\ValidationException $e) {
+			return response()->redirect()->with(['errors' => $e->errors()])->back();
+		}
+		
+		$data['subject'] = $request->input('subject') ?? '';
 
-		$valid->submit() ?: redirect()->back()->with(['errors' => $valid->errors]);
-
-		$id = $this->model->table('replies')->insert([
-			'message_id' => $valid->values['message_id'],
-			'body' => $valid->values['body']
-		], 'id');
-		$id = !$id ?: $this->email($valid->values);
-
-		!$id ?: Session::set('message', ['success' => 'Reply Has Been Sent']);
-		exit('<script>window.location.href = "/messages/'.$valid->values['message_id'].'"</script>');
+		$inserted = Message::query()->table('replies')->insert([
+			'message_id' => $data['message_id'],
+			'body' => $data['body']
+		]);
+		
+		if ($inserted) {
+		    $this->email($data);
+		    Session::set('message', ['success' => 'Reply Has Been Sent']);
+		}
+		
+		return response()->redirect('/messages/'.$data['message_id']);
 	}
 
 	public function delete(int $id=0)
 	{
-		$message = $this->model->find($id);
-		$message ?: exit('404 not found') ;
+		$message = Message::query()->find($id);
+		if (!$message) exit('404 not found');
 
-		$delete = $this->model->delete($id);
-		!$delete ?: redirect('/messages')->with(['success' => 'message has been deleted']);
+		$delete = Message::query()->where('id', $id)->delete();
+		if ($delete) {
+		    return response()->redirect('/messages')->with(['success' => 'message has been deleted']);
+		}
+		return response()->redirect('/messages');
 	}
 
 	public function new()
 	{
-		helper(['message']);
-	    return view('message/new');
+		// helper(['message']);
+	    return view('message.new');
 	}
 
 	public function sendMessage()
 	{
-		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
-		$valid = new Form();
-		$valid->post('email')->required()->email();
-		$valid->post('subject')->required();
-		$valid->post('body')->required();
+		$request = request();
+		try {
+			$data = Validator::make($request->all())
+				->required(['email', 'subject', 'body'])
+				->email('email')
+				->validated();
+		} catch (\App\Validation\ValidationException $e) {
+			return response()->redirect()->with(['errors' => $e->errors()])->back();
+		}
 
-		$valid->submit() ?: redirect()->back()->with(['errors' => $valid->errors]);
-		$valid->values['name'] = strstr($valid->values['email'], '@', true);
+		$data['name'] = strstr($data['email'], '@', true);
 
-		$email = $this->email($valid->values);
+		$emailSent = $this->email($data);
 
-		!$email ?: Session::set('message', ['success' => 'Mail Has Been Sent']);
-		exit('<script>window.location.href = "/messages/new"</script>');
+		if ($emailSent) {
+		    Session::set('message', ['success' => 'Mail Has Been Sent']);
+		}
+		return response()->redirect('/messages/new');
 	}
 
 	public function email(array $data)
 	{
-		//Create an instance; passing `true` enables exceptions
 		$mail = new PHPMailer(true);
 		$mail->CharSet = "UTF-8";
 
 		try {
-			//Server settings
-			$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-			$mail->isSMTP();                                            //Send using SMTP
-			$mail->Host       = 'smtp.mailtrap.io';                     //Set the SMTP server to send through
-			$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-			$mail->Username   = 'e48e72cf893080';                     //SMTP username
-			$mail->Password   = '0d90a2ccaadc2d';                               //SMTP password
-			// $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-			$mail->Port       = 2525;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+			$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+			$mail->isSMTP();
+			$mail->Host       = 'smtp.mailtrap.io';
+			$mail->SMTPAuth   = true;
+			$mail->Username   = 'e48e72cf893080';
+			$mail->Password   = '0d90a2ccaadc2d';
+			$mail->Port       = 2525;
 
-			//Recipients
 			$mail->setFrom('sahin.sayed1@gmail.com', 'Mailer');
-			$mail->addAddress($data['email'], $data['name']);     //Add a recipient
-			// $mail->addAddress('ellen@example.com');               //Name is optional
-			// $mail->addReplyTo('info@example.com', 'Information');
-			// $mail->addCC('cc@example.com');
-			// $mail->addBCC('bcc@example.com');
+			$mail->addAddress($data['email'], $data['name']);
 
-			//Attachments
-			// $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-			// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-			//Content
-			$mail->isHTML(true);                                  //Set email format to HTML
+			$mail->isHTML(true);
 			$mail->Subject = $data['subject'];
 
 			ob_start();
-			view('email/leemunroe', ['email' => $data]);
+			view('email.leemunroe', ['email' => $data]);
 			$body = ob_get_clean();
 
 			$mail->Body    = $body;
@@ -139,6 +135,7 @@ class MessageController extends Controller
 			return true;
 		} catch (Exception $e) {
 			echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+			return false;
 		}
 	}
 }

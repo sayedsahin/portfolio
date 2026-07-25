@@ -1,11 +1,12 @@
-<?php view('dashboard/header'); ?>
+<?php ob_start(); ?>
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<h3>Update Password</h3>
 	<?php
-	    helper(['message']);
-	    message();
+	    // helper(['message']);
+	    show_flash();
 	?>
 	<form action="<?= BASE_URL; ?>/password/update" method="post">
+		<?= csrf_field(); ?>
 		<div class="mb-3">
 			<label for="old-password" class="form-label">Old Password</label>
 			<input type="password" name="old-password" placeholder="Type Your Old Password" class="form-control" id="old-password" autocomplete="current-password">
@@ -21,4 +22,5 @@
 		<button type="submit" name="password-update" class="btn btn-secondary">Update</button>
 	</form>
 </section>
-<?php view('dashboard/footer'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require view_path('layout.dashboard'); ?>

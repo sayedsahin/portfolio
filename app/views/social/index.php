@@ -1,4 +1,4 @@
-<?php view('dashboard/header'); ?>
+<?php ob_start(); ?>
 <style>
   .w-svg {width: 24px;height: 25px;}
 </style>
@@ -8,8 +8,8 @@
     <button onclick="window.location.href='<?= BASE_URL ?>/socials/create';" class="border px-2 py-1 rounded">New</button>
 </div>
 <?php
-    helper(['message']);
-    message();
+    // helper(['message']);
+    show_flash();
 ?>
 <table class="table table-striped">
   <thead>
@@ -27,17 +27,18 @@
       foreach ($socials as $key => $social) { 
     ?>
     <tr>
-      <th scope="row"><?= $social['id']; ?></th>
-      <td><?= $social['name']; ?></td>
-      <td><?= $social['link']; ?></td>
-      <td style="width: 24px; height: 24px"><?= $social['icon']; ?></td>
+      <th scope="row"><?= $social->id; ?></th>
+      <td><?= $social->name; ?></td>
+      <td><?= $social->link; ?></td>
+      <td style="width: 24px; height: 24px"><?= $social->icon; ?></td>
       <td>
-        <a class="btn btn-dark btn-sm" href="<?= BASE_URL; ?>/socials/<?= $social['id']; ?>/edit" class="text-secondary">Edit</a>
-        <a onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm" href="<?= BASE_URL; ?>/socials/<?= $social['id']; ?>/delete" class="text-danger">delete</a>
+        <a class="btn btn-dark btn-sm" href="<?= BASE_URL; ?>/socials/<?= $social->id; ?>/edit" class="text-secondary">Edit</a>
+        <a onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm" href="<?= BASE_URL; ?>/socials/<?= $social->id; ?>/delete" class="text-danger">delete</a>
       </td>
     </tr>
     <?php } } ?>
   </tbody>
 
-<?php view('dashboard/footer'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require view_path('layout.dashboard'); ?>
 </table>

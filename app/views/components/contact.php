@@ -1,6 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-lg-8 col-xl-7">
         <form id="contactForm" method="post" action="<?= BASE_URL; ?>/contact">
+            <?= csrf_field() ?>
             <!-- Name input-->
             <div class="form-floating mb-3">
                 <input name="name" class="form-control" id="name" type="text" placeholder="Enter your name..." required />
@@ -23,7 +24,7 @@
             </div>
 
             <div id="submitMessage">
-                <?php message(); ?>
+                <?php show_flash(); ?>
             </div>
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Send</button>

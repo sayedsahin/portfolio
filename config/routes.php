@@ -1,17 +1,31 @@
-<?php 	
+<?php
 
-use Controllers\AccountController;
-use Controllers\DashboardController;
-use Controllers\HomeController;
-use Controllers\ImageController;
-use Controllers\MessageController;
-use Controllers\PasswordController;
-use Controllers\ProjectController;
-use Controllers\SiteController;
-use Controllers\SitemapController;
-use Controllers\SocialController;
-use Controllers\UserController;
+use App\Controllers\AccountController;
+use App\Controllers\AuthController;
+use App\Controllers\DashboardController;
+use App\Controllers\HomeController;
+use App\Controllers\ImageController;
+use App\Controllers\MessageController;
+use App\Controllers\PasswordController;
+use App\Controllers\ProjectController;
+use App\Controllers\SiteController;
+use App\Controllers\SitemapController;
+use App\Controllers\SocialController;
+use App\Controllers\UserController;
+use App\Middlewares\Authenticated;
+use App\Middlewares\Guest;
 
+/**
+ * @var FastRoute\RouteCollector $route
+ */
+
+
+// $route->get('/', [HomeController::class, 'index']);
+// $route->get('/login', [AuthController::class, 'login', [Guest::class]]);
+// $route->post('/login', [AuthController::class, 'loginProcess', [Guest::class]]);
+// $route->get('/register', [AuthController::class, 'registration']);
+// $route->post('/register', [AuthController::class, 'registrationProcess']);
+// $route->get('/logout', [AuthController::class, 'logout', [Authenticated::class]]);
 
 $route->get('/', [HomeController::class, 'index']);
 $route->post('/contact', [HomeController::class, 'contact']);

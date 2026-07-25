@@ -1,8 +1,7 @@
 <?php 
-namespace Controllers;
+namespace App\Controllers;
 
-use Systems\Controller;
-use Models\Project;
+use App\Models\Project;
 
 class SitemapController extends Controller
 {
@@ -14,8 +13,8 @@ class SitemapController extends Controller
 
 	public function index()
 	{
-		$links = $this->model->select('id')->where('visible', 1) ->get();
+		$links = $this->model->select('id')->where('visible', 1)->get();
 		header('Content-type: application/xml');
-		echo view('sitemap', ['links' => $links]);
+		view('sitemap', ['links' => $links]);
 	}
 }

@@ -7,7 +7,7 @@
     </url>
     <?php foreach ($links as $link): ?>
     <url>
-        <loc><?php echo BASE_URL; ?>/projects/<?php echo $link['id']; ?></loc>
+        <loc><?php echo BASE_URL; ?>/projects/<?php echo $link->id; ?></loc>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>

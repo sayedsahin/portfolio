@@ -1,11 +1,12 @@
-<?php view('dashboard/header'); ?>
+<?php ob_start(); ?>
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<h3>Add a new project</h3>
 	<?php
-	    helper(['message']);
-	    message();
+	    // helper(['message']);
+	    show_flash();
 	?>
 	<form action="<?= BASE_URL; ?>/projects/store" method="post" enctype="multipart/form-data">
+		<?= csrf_field() ?>
 		<div class="mb-3">
 			<label for="name" class="form-label">Project Name</label>
 			<input type="text" name="name" placeholder="Project Name" class="form-control" id="name">
@@ -29,4 +30,5 @@
 		<button type="submit" name="project" class="btn btn-secondary">Submit</button>
 	</form>
 </section>
-<?php view('dashboard/footer'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require view_path('layout.dashboard'); ?>

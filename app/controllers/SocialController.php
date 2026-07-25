@@ -1,10 +1,10 @@
 <?php 
-namespace Controllers;
+namespace App\Controllers;
 
-use Systems\Controller;
-use Libraries\Form;
-use Models\Social;
-use Systems\Session;
+use App\Validation\Validator;
+use App\Models\Social;
+use App\Systems\Session\Session;
+use App\Middlewares\Authenticated;
 
 class SocialController extends Controller
 {
@@ -12,75 +12,77 @@ class SocialController extends Controller
 	function __construct()
 	{
 		$this->model = new Social;
-		Session::init();
-		Session::auth();
-		$data = [];
+		$this->middleware(Authenticated::class);
 	}
 
 	public function index()
 	{
-		return view('social/index', [
+		return view('social.index', [
 			'socials' => $this->model->get(),
 		]);
 	}
 
 	public function create()
 	{
-		return view('social/create');
+		return view('social.create');
 	}
 
 	public function store()
 	{
-		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
-		$valid = new Form();
-		$valid->post('name')->required()->length(1, 50);
-		$valid->post('link')->required()->length(13, 50);
-		$valid->post('icon')->required()->length(10, 10000);
-		$valid->values['icon'] = $_POST['icon'];
-
-		if ($valid->submit()) {
-			$id = $this->model->insert($valid->values, 'id');
-			!$id ?: redirect('/socials')->with(['success' => 'Social Icon Submited Successfully']);
-		}else {
-			redirect()->back()->with(['errors' => $valid->errors]);
+		$request = request();
+		try {
+			$data = Validator::make($request->all())
+				->required(['name', 'link', 'icon'])
+				->validated();
+		} catch (\App\Validation\ValidationException $e) {
+			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
+
+		$inserted = $this->model->insert($data);
+		
+		if ($inserted) {
+		    return response()->redirect('/socials')->with(['success' => 'Social Icon Submited Successfully']);
+		}
+		return response()->redirect()->back();
 	}
 
 	public function edit(int $id=0)
 	{
-		$id ?: exit('404 not found') ;
+		if (!$id) exit('404 not found');
 
-		return view('social/edit', [
+		return view('social.edit', [
 			'social' => $this->model->find($id),
 		]);
 	}
 
 	public function update(int $id=0)
 	{
-		$_SERVER['REQUEST_METHOD'] === 'POST' ?: exit;
-		$valid = new Form();
-		$valid->post('id')->required()->length(1, 10);
-		$valid->post('name')->required()->length(1, 50);
-		$valid->post('link')->required()->length(13, 50);
-		$valid->post('icon')->required()->length(10, 10000);
-		$valid->values['icon'] = $_POST['icon'];
-
-		if ($valid->submit()) {
-			$id = $this->model->where('id', $valid->values['id'])
-				->update($valid->values);
-
-			!$id ?: redirect()->back()->with(['success' => 'Social Icon Updated Successfully']);
-		}else {
-			redirect()->back()->with(['errors' => $valid->errors]);
+		$request = request();
+		try {
+			$data = Validator::make($request->all())
+				->required(['id', 'name', 'link', 'icon'])
+				->validated();
+		} catch (\App\Validation\ValidationException $e) {
+			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
+
+		$updated = $this->model->where('id', $data['id'])->update($data);
+
+		if ($updated) {
+		    return response()->redirect()->with(['success' => 'Social Icon Updated Successfully'])->back();
+		}
+		return response()->redirect()->back();
 	}
 
 	public function delete(int $id=0)
 	{
 		$social = $this->model->find($id);
-		$social ?: exit('404 not found') ;
+		if (!$social) exit('404 not found');
 
-		$delete = $this->model->delete($id);
-		!$delete ?: redirect('/socials')->with(['success' => 'Social Icon Deleted Successfully']);
+		$delete = $this->model->where('id', $id)->delete();
+		if ($delete) {
+		    return response()->redirect('/socials')->with(['success' => 'Social Icon Deleted Successfully']);
+		}
+		return response()->redirect('/socials');
 	}
 }

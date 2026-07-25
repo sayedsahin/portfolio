@@ -6,7 +6,7 @@
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Location</h4>
                         <p class="lead mb-0">
-                            <?= $site['location'] ?>
+                            <?= $site->location ?>
                         </p>
                     </div>
                     <!-- Footer Social Icons-->
@@ -16,22 +16,22 @@
                             if ($socials) {
                             foreach ($socials as $key => $social) { 
                         ?>
-                        <a class="btn btn-outline-light btn-social mx-1" href="<?= $social['link'] ?>" target="_blank">
-                            <?= $social['icon'] ?>
+                        <a class="btn btn-outline-light btn-social mx-1" href="<?= $social->link ?>" target="_blank">
+                            <?= $social->icon ?>
                         </a>
                         <?php } } ?>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">Credit</h4>
-                        <p class="lead mb-0"><?= htmlspecialchars_decode($site['credit']) ?></p>
+                        <p class="lead mb-0"><?= htmlspecialchars_decode($site->credit) ?></p>
                     </div>
                 </div>
             </div>
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small><?= $site['copyright'] ?> <?= date("Y");?></small></div>
+            <div class="container"><small><?= $site->copyright ?> <?= date("Y");?></small></div>
         </div>
 
         <svg class="d-none" xmlns="http://www.w3.org/2000/svg">
@@ -48,8 +48,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <?php if ($_SERVER['REQUEST_URI'] === '/'): ?>
-        <script src="<?= BASE_URL; ?>/public/js/scripts.js"></script>
+        <script src="<?= BASE_URL; ?>/js/scripts.js"></script>
         <?php endif ?>
-        <!-- <script src="<?= BASE_URL; ?>/public/js/sb-forms-0.4.1.js"></script> -->
+        <!-- <script src="<?= BASE_URL; ?>/js/sb-forms-0.4.1.js"></script> -->
     </body>
 </html>

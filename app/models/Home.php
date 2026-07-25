@@ -1,35 +1,26 @@
 <?php 
-namespace Models;
-use Systems\Model;
+namespace App\Models;
+use App\Systems\QueryBuilder;
 
-class Home extends Model
+class Home extends QueryBuilder
 {
-	protected string $table = '';
-
-	function __construct()
-	{
-		parent::__construct();
-		
-	}
-
 	public function user()
 	{
-		return parent::table('users')->where('id', 1)->get('single');
+		return $this->table('users')->where('id', 1)->first();
 	}
 
 	public function project()
 	{
-		return parent::select('id, thumb')->table('projects')->order('id DESC')->get();
+		return $this->select('id, thumb')->table('projects')->order('id DESC')->get();
 	}
 
 	public function about()
 	{
-		return parent::select('about_1, about_2')->table('abouts')->where('id', 1)->get('single');
+		return $this->select('about_1, about_2')->table('abouts')->where('id', 1)->first();
 	}
 
 	public function social()
 	{
-		return parent::select('icon, link')->table('socials')->get();
+		return $this->select('icon, link')->table('socials')->get();
 	}
 }
-?>

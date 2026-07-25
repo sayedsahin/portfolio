@@ -1,7 +1,7 @@
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5 rounded-circle" src="<?= BASE_URL; ?>/public/assets/img/sayed.jpg" alt="..." />
+        <img class="masthead-avatar mb-5 rounded-circle" src="<?= BASE_URL; ?>/assets/img/sayed.jpg" alt="..." />
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0">Sayed Sahin</h1>
         <!-- Icon Divider-->
