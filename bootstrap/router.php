@@ -3,10 +3,6 @@
 declare(strict_types=1);
 
 /** @var bool $isApi */
-dd([
-    'method' => request()->method(),
-    'uri' => request()->path(),
-]);
 $dispatcher = FastRoute\cachedDispatcher(function (FastRoute\RouteCollector $route) {
 	require_once ROOT_PATH . '/config/routes.php';
 }, [
