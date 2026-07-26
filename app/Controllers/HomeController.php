@@ -15,6 +15,7 @@ class HomeController extends Controller
 	public function index()
 	{
 		$data = $this->homeData();
+		$data['projects'] = Home::query()->projects();
 		$data['user'] = Home::query()->user();
 		return view('index', $data);
 	}
@@ -22,6 +23,8 @@ class HomeController extends Controller
 	public function project(int $id)
 	{
 		$data = $this->homeData();
+		$data['project'] = Home::query()->project($id);
+		$data['images'] = db()->table('project_image')->where('project_id', $id)->get();
 		return view('project.show', $data);
 	}
 
@@ -48,7 +51,6 @@ class HomeController extends Controller
 
 	private function homeData() : array
 	{
-		$data['projects'] = Home::query()->project();
 		$data['about'] = Home::query()->about();
 		$data['socials'] = Home::query()->social();
 		$data['site'] = Home::query()->table('sites')->find(1);

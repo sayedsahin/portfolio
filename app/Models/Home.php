@@ -9,7 +9,12 @@ class Home extends QueryBuilder
 		return $this->table('users')->where('id', 1)->first();
 	}
 
-	public function project()
+	public function project(int $id)
+	{
+		return $this->table('projects')->find($id);
+	}
+
+	public function projects()
 	{
 		return $this->select('id, thumb')->table('projects')->order('id DESC')->get();
 	}
