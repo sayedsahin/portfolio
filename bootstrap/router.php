@@ -11,6 +11,10 @@ $dispatcher = FastRoute\cachedDispatcher(function (FastRoute\RouteCollector $rou
 	'cacheDisabled' => config('app.debug'),     /* optional, enabled by default */
 ]);
 
+dd([
+    'method' => request()->method(),
+    'uri' => request()->path(),
+]);
 // Fetch method and URI from somewhere
 $httpMethod =request()->method();
 $uri = request()->path();
@@ -22,11 +26,6 @@ $uri = request()->path();
 // $uri = rawurldecode($uri);
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-dd([
-    'method' => $httpMethod,
-    'uri' => $uri,
-    'route' => $routeInfo,
-]);
 switch ($routeInfo[0]) {
 	case FastRoute\Dispatcher::NOT_FOUND:
 		// $isApi come from public/index.php
