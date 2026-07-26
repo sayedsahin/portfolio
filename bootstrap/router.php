@@ -22,6 +22,11 @@ $uri = request()->path();
 // $uri = rawurldecode($uri);
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
+dd([
+    'method' => $httpMethod,
+    'uri' => $uri,
+    'route' => $routeInfo,
+]);
 switch ($routeInfo[0]) {
 	case FastRoute\Dispatcher::NOT_FOUND:
 		// $isApi come from public/index.php
