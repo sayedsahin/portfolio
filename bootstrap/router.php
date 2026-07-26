@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 /** @var bool $isApi */
-
+dd([
+    'method' => request()->method(),
+    'uri' => request()->path(),
+]);
 $dispatcher = FastRoute\cachedDispatcher(function (FastRoute\RouteCollector $route) {
 	require_once ROOT_PATH . '/config/routes.php';
 }, [
@@ -11,10 +14,7 @@ $dispatcher = FastRoute\cachedDispatcher(function (FastRoute\RouteCollector $rou
 	'cacheDisabled' => config('app.debug'),     /* optional, enabled by default */
 ]);
 
-dd([
-    'method' => request()->method(),
-    'uri' => request()->path(),
-]);
+
 // Fetch method and URI from somewhere
 $httpMethod =request()->method();
 $uri = request()->path();
