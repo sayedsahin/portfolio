@@ -10,10 +10,7 @@ declare(strict_types=1);
 */
 require_once __DIR__ . '/../config/path.php';
 require_once ROOT_PATH . '/vendor/autoload.php';
-dd([
-    'method' => request()->method(),
-    'uri' => request()->path(),
-]);
+
 /*
 |--------------------------------------------------------------------------
 | Load Config
