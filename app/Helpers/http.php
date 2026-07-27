@@ -74,27 +74,29 @@ if (!function_exists('back')) {
 }
 
 if (!function_exists('show_flash')) {
-	function show_flash()
-	{
-		$msg = Session::get("flash");
-		if (!$msg) {
-			return;
-		}
-		if (!empty($msg['errors'])) {
-			echo "<div class='alert alert-danger'>";
-			foreach ($msg as $key => $value) {
-				foreach ($value as $k => $val) {
-					echo "* " . e($val) . " (" . e($k) . ")<br>";
-				}
-			}
-			echo "</div>";
-		} elseif (!empty($msg['error'])) {
-			echo "<div class='alert alert-danger'>" . e($msg['error']) . "</div>";
-		} else {
-			echo "<div class='alert alert-success'>" . e($msg['success']) . "</div>";
-		}
-		Session::forget('flash');
-	}
+    function show_flash()
+    {
+        $msg = Session::get("flash");
+        if (!$msg) {
+            return;
+        }
+
+        if (!empty($msg['errors'])) {
+            echo "<div class='alert alert-danger'>";
+            foreach ($msg['errors'] as $field => $errorArray) {
+                foreach ($errorArray as $errorMessage) {
+                    echo "* " . e($errorMessage) . " (" . e($field) . ")<br>";
+                }
+            }
+            echo "</div>";
+        } elseif (!empty($msg['error'])) {
+            echo "<div class='alert alert-danger'>" . e($msg['error']) . "</div>";
+        } elseif (!empty($msg['success'])) {
+            echo "<div class='alert alert-success'>" . e($msg['success']) . "</div>";
+        }
+
+        Session::forget('flash');
+    }
 }
 
 
@@ -131,7 +133,7 @@ function is_ajax(): bool
 
 /* function is_api_request(): bool
 {
-	
+
 	$uri = $_SERVER['REQUEST_URI'] ?? '';
 
 	if (str_starts_with($uri, '/api')) {
