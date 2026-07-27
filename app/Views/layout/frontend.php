@@ -62,7 +62,7 @@ use App\Supports\Auth;
                 event.preventDefault();
             }
         </script>
-        
+
         <?= $content; ?>
 
         <!-- Footer-->
@@ -79,9 +79,9 @@ use App\Supports\Auth;
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">Around the Web</h4>
-                        <?php 
+                        <?php
                             if (!empty($socials)) {
-                            foreach ($socials as $key => $social) { 
+                            foreach ($socials as $key => $social) {
                         ?>
                         <a class="btn btn-outline-light btn-social mx-1" href="<?= $social->link ?>" target="_blank">
                             <?= $social->icon ?>
@@ -91,7 +91,7 @@ use App\Supports\Auth;
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">Credit</h4>
-                        <p class="lead mb-0"><?= htmlspecialchars_decode($site->credit ?? '') ?></p>
+                        <p class="lead mb-0"><?= e($site->credit ?? '') ?></p>
                     </div>
                 </div>
             </div>

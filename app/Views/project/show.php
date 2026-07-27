@@ -57,7 +57,7 @@
 
 
                         <!-- Portfolio Modal - Text-->
-                        <div class="my-4 text-start text-secondary"><?= htmlspecialchars_decode($project->description); ?></div>
+                        <div class="my-4 text-start text-secondary"><?= $project->description; ?></div>
                         <a href="<?= $project->source; ?>" class="btn btn-secondary" target="_blank">
                             <svg style="width: 1em; height: 1em; fill:#fff;">
                                 <use xlink:href="#icon-github"></use>
