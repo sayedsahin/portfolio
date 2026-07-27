@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controllers;
 
 use App\Validation\Validator;
@@ -22,7 +22,7 @@ class ProjectController extends Controller
 
 	public function index()
 	{
-		$data['projects'] = $this->model->select('id, name, description, thumb')->get();
+		$data['projects'] = $this->model->select('id, name, description, thumb')->order('id DESC')->get();
 		return view('project.index', $data);
 	}
 
@@ -52,7 +52,7 @@ class ProjectController extends Controller
 		} catch (\App\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
-		
+
 		$data['source'] = $request->input('source') ?? '';
 		$data['preview'] = $request->input('preview') ?? '';
 		$data['description'] = $request->input('description') ?? '';
@@ -88,7 +88,7 @@ class ProjectController extends Controller
 				imagepng($thumbnile, $thumb);
 			}
 		}
-		
+
 		$data['user_id'] = $this->id;
 		$this->model->insert($data);
 		return response()->redirect('/projects')->with(['success' => 'Project Submited Successfully']);
@@ -158,11 +158,11 @@ class ProjectController extends Controller
 				imagepng($thumbnile, $thumb);
 			}
 		}
-		
+
 		$this->model->where('id', $data['id'])->update($data);
 		return response()->redirect()->with(['success' => 'Project Updated Successfully'])->back();
 	}
-	
+
 	public function delete($id = 0)
 	{
 		$project = $this->model->project($id);

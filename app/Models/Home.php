@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Models;
 use App\Systems\QueryBuilder;
 
@@ -16,7 +16,7 @@ class Home extends QueryBuilder
 
 	public function projects()
 	{
-		return $this->select('id, thumb')->table('projects')->order('id DESC')->get();
+		return $this->select('id, thumb')->table('projects')->where('visible', 1)->order('id DESC')->get();
 	}
 
 	public function about()
