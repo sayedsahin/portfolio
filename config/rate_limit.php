@@ -39,10 +39,10 @@ return [
         'window_seconds' => 60,
         'routes' => [
             'POST /login',
-            'POST /register',
-            'POST /api/auth/login',
-            'POST /api/auth/register',
-            'POST /api/auth/forgot',
+            // 'POST /register',
+            // 'POST /api/auth/login',
+            // 'POST /api/auth/register',
+            // 'POST /api/auth/forgot',
         ],
     ],
 
