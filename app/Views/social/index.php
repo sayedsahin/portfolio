@@ -7,10 +7,7 @@
     <h5 class="text-black-50">Social Icon List</h5>
     <button onclick="window.location.href='<?= BASE_URL ?>/socials/create';" class="border px-2 py-1 rounded">New</button>
 </div>
-<?php
-    // helper(['message']);
-    flash();
-?>
+<?= flash(); ?>
 <table class="table table-striped">
   <thead>
     <tr>

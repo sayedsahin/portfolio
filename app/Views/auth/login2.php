@@ -3,7 +3,7 @@
 ob_start();
 ?>
 <h2><?= e($title) ?></h2>
-<?php flash(); ?>
+<?= flash(); ?>
 <form method="post" action="/login">
     <?= csrf_field() ?>
     <p>

@@ -1,10 +1,7 @@
 <?php ob_start(); ?>
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<h3>Add a new social icon</h3>
-	<?php
-	    // helper(['message']);
-	    flash();
-	?>
+	<?=  flash(); ?>
 	<form action="<?= BASE_URL; ?>/socials/create" method="post">
 		<?= csrf_field() ?>
 		<div class="mb-3">

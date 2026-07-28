@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<h3>Send a new email</h3>
-	<?php flash(); ?>
+	<?= flash(); ?>
 	<form action="<?= BASE_URL; ?>/messages/new" method="post">
 		<?= csrf_field() ?>
 		<div class="mb-3">

@@ -7,10 +7,7 @@
 <section Class="col-md-4 col-sm-6 col-10 mx-auto mt-3">
 	<!-- <h3>Edit social icon</h3> -->
 	<p class="d-block mx-auto" style="width: 70px;"><?= $social->icon ?></p>
-	<?php
-	    // helper(['message']);
-	    flash();
-	?>
+	<?=  flash(); ?>
 	<form action="<?= BASE_URL; ?>/socials/<?= $social->id; ?>/edit" method="post">
 		<?= csrf_field() ?>
 		<input type="hidden" name="id" value="<?= $social->id; ?>">

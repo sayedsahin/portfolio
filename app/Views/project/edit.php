@@ -5,10 +5,7 @@
 		<h3>Edit project</h3>
 	    <button onclick="window.location.href='<?= BASE_URL ?>/projects/<?= $project->id; ?>';" class="border px-1 py-0 rounded">view</button>
 	</div>
-	<?php
-	    // helper(['message']);
-	    flash();
-	?>
+	<?=  flash(); ?>
 
 	<form action="<?= BASE_URL; ?>/projects/<?= $project->id; ?>/update" method="post" enctype="multipart/form-data">
 		<?= csrf_field() ?>

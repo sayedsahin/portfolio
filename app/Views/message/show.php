@@ -5,7 +5,7 @@
     <h5 class="text-black-50">Display Message</h5>
     <button onclick="window.location.href='<?= BASE_URL ?>/message';" class="border px-2 py-1 rounded">Back</button>
 </div>
-	<?php flash();?>
+	<?= flash();?>
 	<div class="card mt-2" style="">
 		<pre class="card-body" style="white-space: pre-wrap; word-wrap: break-word;">
 Name: <?= $message->name; ?>
