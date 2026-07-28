@@ -9,7 +9,7 @@
 	<p class="d-block mx-auto" style="width: 70px;"><?= $social->icon ?></p>
 	<?php
 	    // helper(['message']);
-	    show_flash();
+	    flash();
 	?>
 	<form action="<?= BASE_URL; ?>/socials/<?= $social->id; ?>/edit" method="post">
 		<?= csrf_field() ?>
@@ -27,7 +27,7 @@
 			<label for="icon" class="form-label">Social Icon</label>
 			<textarea name="icon" placeholder="<svg xmlns='http://www.w3.org...." class="form-control" id="icon" rows="3"><?= $social->icon ?></textarea>
 		</div>
-		
+
 		<button type="submit" name="social" class="btn btn-secondary">Update</button>
 	</form>
 </section>

@@ -43,6 +43,9 @@ if (!function_exists('roles')) {
 }
 
 if (!function_exists('session')) {
+    /**
+     * @return Session
+     */
     function session()
     {
         static $proxy = null;

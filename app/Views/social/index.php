@@ -9,7 +9,7 @@
 </div>
 <?php
     // helper(['message']);
-    show_flash();
+    flash();
 ?>
 <table class="table table-striped">
   <thead>
@@ -22,9 +22,9 @@
     </tr>
   </thead>
   <tbody>
-    <?php 
+    <?php
       if ($socials) {
-      foreach ($socials as $key => $social) { 
+      foreach ($socials as $key => $social) {
     ?>
     <tr>
       <th scope="row"><?= $social->id; ?></th>

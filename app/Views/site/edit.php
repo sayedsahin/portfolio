@@ -8,7 +8,7 @@
 	<h3>Edit site Info</h3>
 	<?php
 	    // helper(['message']);
-	    show_flash();
+	    flash();
 	?>
 	<form action="<?= BASE_URL; ?>/site" method="post">
 		<?= csrf_field() ?>
@@ -39,7 +39,7 @@
 			<label for="credit" class="form-label">Credit</label>
 			<textarea name="credit" placeholder="Credit..." class="form-control" id="credit" rows="3"><?= $site->credit ?></textarea>
 		</div>
-		
+
 		<button type="submit" name="site" class="btn btn-secondary">Update</button>
 	</form>
 </section>

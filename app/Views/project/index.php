@@ -6,7 +6,7 @@
 </div>
 <?php
     // helper(['message']);
-    show_flash();
+    flash();
 ?>
 <table class="table table-striped align-baseline">
   <thead>
@@ -19,9 +19,9 @@
     </tr>
   </thead>
   <tbody>
-    <?php 
+    <?php
     if ($projects) {
-    foreach ($projects as $key => $project) { 
+    foreach ($projects as $key => $project) {
     ?>
     <tr>
       <th scope="row"><?= $project->id; ?></th>

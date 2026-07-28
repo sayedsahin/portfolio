@@ -3,7 +3,7 @@
 	<h3>Update Password</h3>
 	<?php
 	    // helper(['message']);
-	    show_flash();
+	    flash();
 	?>
 	<form action="<?= BASE_URL; ?>/password/update" method="post">
 		<?= csrf_field(); ?>

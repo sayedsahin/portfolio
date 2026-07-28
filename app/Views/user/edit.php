@@ -5,7 +5,7 @@
 		<a href="<?= BASE_URL.'/'.$user->avatar ?>" target="_blank"><img class="rounded-circle" style="width: 10rem" src="<?= BASE_URL.'/'.$user->avatar_thumb ?>" alt=""></a>
 		<?php
 		    // helper(['message']);
-		    show_flash();
+		    flash();
 		?>
 	</div>
 	<?php $csrf = csrf_field(); ?>

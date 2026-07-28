@@ -5,7 +5,7 @@
     <h5 class="text-black-50">Display Message</h5>
     <button onclick="window.location.href='<?= BASE_URL ?>/message';" class="border px-2 py-1 rounded">Back</button>
 </div>
-	<?php show_flash();?>
+	<?php flash();?>
 	<div class="card mt-2" style="">
 		<pre class="card-body" style="white-space: pre-wrap; word-wrap: break-word;">
 Name: <?= $message->name; ?>
@@ -43,7 +43,7 @@ Phone: <?= $message->phone; ?>
 			<input type="hidden" name="subject" value="<?= textShorten($message->body, 30) ?>">
 			<textarea name="body" placeholder="reply message" class="form-control" id="icon" rows="3"></textarea>
 		</div>
-		
+
 		<button type="submit" name="reply" class="btn btn-secondary">Reply</button>
 	</form>
 </section>

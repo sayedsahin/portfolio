@@ -3,7 +3,7 @@
 	<h3>Add a new social icon</h3>
 	<?php
 	    // helper(['message']);
-	    show_flash();
+	    flash();
 	?>
 	<form action="<?= BASE_URL; ?>/socials/create" method="post">
 		<?= csrf_field() ?>

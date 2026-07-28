@@ -4,7 +4,7 @@
     <h5 class="text-black-50">Project List</h5>
     <button onclick="window.location.href='<?= BASE_URL ?>/messages/new';" class="border px-2 py-1 rounded">New</button>
 </div>
-<?php show_flash();?>
+<?php flash();?>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,7 +19,7 @@
   </thead>
   <tbody>
 
-    <?php 
+    <?php
       if ($messages) { $i=0;
       foreach ($messages as $key => $message) {  $i++;
     ?>

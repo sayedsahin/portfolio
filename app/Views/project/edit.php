@@ -7,9 +7,9 @@
 	</div>
 	<?php
 	    // helper(['message']);
-	    show_flash();
+	    flash();
 	?>
-	
+
 	<form action="<?= BASE_URL; ?>/projects/<?= $project->id; ?>/update" method="post" enctype="multipart/form-data">
 		<?= csrf_field() ?>
 		<input type="hidden" name="id" value="<?= $project->id; ?>">

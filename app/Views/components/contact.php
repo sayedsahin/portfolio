@@ -22,12 +22,47 @@
                 <textarea name="body" class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem"></textarea>
                 <label for="message">Message*</label>
             </div>
+            <div class="mb-3">
+                <label for="captcha_answer" class="form-label text-secondary">Security Check</label>
+
+                <div class="input-group">
+                    <span class="input-group-text p-0 overflow-hidden bg-light border-end-0">
+                        <canvas id="captchaCanvas" width="100" height="38"></canvas>
+                    </span>
+
+                    <input type="number"
+                        id="captcha_answer"
+                        name="captcha_answer"
+                        class="form-control w-25"
+                        required
+                        autocomplete="off"
+                        placeholder="Enter the answer"
+                        aria-describedby="captcha-addon">
+                </div>
+            </div>
 
             <div id="submitMessage">
-                <?php show_flash(); ?>
+                <?= flash(); ?>
             </div>
             <!-- Submit Button-->
             <button class="btn btn-primary btn-xl" id="submitButton" type="submit">Send</button>
         </form>
     </div>
 </div>
+<script>
+
+    const canvas = document.getElementById('captchaCanvas');
+const ctx = canvas.getContext('2d');
+
+ctx.fillStyle = '#f8f9fa';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+ctx.font = 'bold 18px sans-serif';
+ctx.fillStyle = '#051e45'; // Bootstrap Primary Color
+ctx.fillText("<?= $captchaQuestion ?>", 10, 24);
+
+ctx.strokeStyle = '#ced4da';
+ctx.beginPath();
+ctx.moveTo(5, 5); ctx.lineTo(95, 30);
+ctx.stroke();
+</script>

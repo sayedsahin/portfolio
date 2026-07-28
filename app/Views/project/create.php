@@ -3,7 +3,7 @@
 	<h3>Add a new project</h3>
 	<?php
 	    // helper(['message']);
-	    show_flash();
+	    flash();
 	?>
 	<form action="<?= BASE_URL; ?>/projects/store" method="post" enctype="multipart/form-data">
 		<?= csrf_field() ?>
