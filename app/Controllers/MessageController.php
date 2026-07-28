@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Controllers;
 
 use App\Validation\Validator;
@@ -19,7 +19,7 @@ class MessageController extends Controller
 
 	public function index()
 	{
-		$messages = Message::query()->limit(100, 0)->order('id DESC')->get();
+		$messages = Message::query('mysql')->limit(100, 0)->order('id DESC')->get();
 		// dd($messages);
 		return view('message.index', [
 			'messages' => $messages,
@@ -29,8 +29,8 @@ class MessageController extends Controller
 	public function show($id=0)
 	{
 		// helper(['time', 'message', 'text']);
-		$data['message'] = Message::query()->find($id);
-		$data['replies'] = Message::query()->table('replies')
+		$data['message'] = Message::query('mysql')->find($id);
+		$data['replies'] = Message::query('mysql')->table('replies')
 			->where('message_id', $id)
 			->get();
 	    return view('message.show', $data);
@@ -47,28 +47,28 @@ class MessageController extends Controller
 		} catch (\App\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
-		
+
 		$data['subject'] = $request->input('subject') ?? '';
 
-		$inserted = Message::query()->table('replies')->insert([
+		$inserted = Message::query('mysql')->table('replies')->insert([
 			'message_id' => $data['message_id'],
 			'body' => $data['body']
 		]);
-		
+
 		if ($inserted) {
 		    $this->email($data);
 		    Session::set('message', ['success' => 'Reply Has Been Sent']);
 		}
-		
+
 		return response()->redirect('/messages/'.$data['message_id']);
 	}
 
 	public function delete(int $id=0)
 	{
-		$message = Message::query()->find($id);
+		$message = Message::query('mysql')->find($id);
 		if (!$message) exit('404 not found');
 
-		$delete = Message::query()->where('id', $id)->delete();
+		$delete = Message::query('mysql')->where('id', $id)->delete();
 		if ($delete) {
 		    return response()->redirect('/messages')->with(['success' => 'message has been deleted']);
 		}

@@ -52,7 +52,7 @@ class HomeController extends Controller
         unset($validated['captcha_answer']);
 
 		$validated['phone'] = $request->input('phone') ?? '';
-		$inserted = db()->table('messages')->insert($validated);
+		$inserted = db('mysql')->table('messages')->insert($validated);
 
 		if ($inserted) {
 		    return response()->redirect('/#submitMessage')->with(['success' => 'email has been sent']);
