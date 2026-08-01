@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Supports;
 
-use App\Systems\Session\Cookie;
-use App\Systems\Session\Session;
+use Bhitti\Http\RequestContext;
+use Bhitti\Session\Cookie;
+use Bhitti\Session\Session;
 use RuntimeException;
 
 final class Auth
@@ -81,13 +82,13 @@ final class Auth
 
     public static function id(): ?int
     {
-        // 1️⃣ check request cache
+        // 1️ check request cache
         $cached = self::getId();
         if ($cached !== null) {
             return $cached;
         }
 
-        // 2️⃣ fallback session
+        // 2️ fallback session
         $id = Session::get('auth_user_id');
 
         if ($id !== null) {
@@ -104,19 +105,19 @@ final class Auth
 
     public static function user(): mixed
     {
-        // 1️⃣ cached user
+        // 1️ cached user
         $user = self::getUser();
         if ($user !== null) {
             return $user;
         }
 
-        // 2️⃣ resolve id
+        // 2️ resolve id
         $id = self::id();
         if (! $id) {
             return null;
         }
 
-        // 3️⃣ resolve user
+        // 3️ resolve user
         $user = self::resolveUser($id);
 
         self::setUser($user);

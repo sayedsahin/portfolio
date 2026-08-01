@@ -4,16 +4,21 @@ declare(strict_types=1);
 
 // Command: php run cache:config
 // Recreates the config cache from .env + config/*.php.
+use Bhitti\Config\ConfigLoader;
+use Symfony\Component\Dotenv\Dotenv;
 
-require_once __DIR__ . '/../config/path.php';
-require_once ROOT_PATH . '/vendor/autoload.php';
-require_once ROOT_PATH . '/app/Helpers/helper.php';
+require dirname(__DIR__) . '/bootstrap/app.php';
 
-use App\Systems\Config\ConfigLoader;
 
-require ROOT_PATH . '/bootstrap/dotenv.php';
+$envFile = ROOT_PATH . '/.env';
+$cacheFile = STORAGE_PATH . '/cache/config.cache';
 
-$cacheFile = STORAGE_PATH . '/cache/config.php';
+if (is_file($envFile)) {
+    $dotenv = new Dotenv();
+    $dotenv->usePutenv();
+    $dotenv->load($envFile);
+}
+
 $items = ConfigLoader::load(ROOT_PATH . '/config');
 
 ConfigLoader::writeCache($cacheFile, $items);

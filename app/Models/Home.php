@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-use App\Systems\QueryBuilder;
+use Bhitti\Database\QueryBuilder;
 
 class Home extends QueryBuilder
 {

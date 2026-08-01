@@ -1,11 +1,13 @@
-<?php 
+<?php
 namespace App\Controllers;
 
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\Site;
-use App\Systems\Session\Session;
+use Bhitti\Session\Session;
 use App\Middlewares\Authenticated;
+use Bhitti\Http\Middleware\Attributes\Middleware;
 
+#[Middleware(Authenticated::class)]
 class SiteController extends Controller
 {
 	protected object $model;
@@ -13,7 +15,6 @@ class SiteController extends Controller
 	function __construct()
 	{
 		$this->model = new Site;
-		$this->middleware(Authenticated::class);
 	}
 
 	public function edit()
@@ -30,7 +31,7 @@ class SiteController extends Controller
 			$data = Validator::make($request->all())
 				->required(['title'])
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 
@@ -41,7 +42,7 @@ class SiteController extends Controller
 		$data['credit'] = $request->input('credit') ?? '';
 
 		$update = $this->model->where('id', 1)->update($data);
-		
+
 		if ($update) {
 		    return response()->redirect()->with(['success' => 'site information updated successfully'])->back();
 		}

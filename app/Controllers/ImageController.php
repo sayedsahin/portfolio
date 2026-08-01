@@ -1,20 +1,18 @@
-<?php 
+<?php
 namespace App\Controllers;
 
 use App\Middlewares\Authenticated;
+use Bhitti\Http\Middleware\Attributes\Middleware;
 
+#[Middleware(Authenticated::class)]
 class ImageController extends Controller
 {
-	function __construct()
-	{
-		$this->middleware(Authenticated::class);
-	}
 
 	public function store()
 	{
 	    $request = request();
 		$id = db()->table('projects')->find($request->input('id'));
-		
+
 		if (!$id) {
 		    exit('404 not found');
 		}
@@ -51,7 +49,7 @@ class ImageController extends Controller
 				}
 			}
 		}
-		
+
 		if ($response) {
 			return response()->redirect()->with(['success' => 'Image Added Successfully'])->back();
 		} else {
@@ -65,7 +63,7 @@ class ImageController extends Controller
 		if (!$image) {
 		    exit('404 not found');
 		}
-		
+
 		$delete = db()->table('project_image')->where('id', $image->id)->delete();
 		if ($delete) {
 			if (file_exists($image->image)) {

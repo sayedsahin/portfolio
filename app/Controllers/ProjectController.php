@@ -1,12 +1,14 @@
 <?php
 namespace App\Controllers;
 
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\Project;
-use App\Systems\Session\Session;
+use Bhitti\Session\Session;
 use App\Middlewares\Authenticated;
 use App\Traits\ImageCustomize;
+use Bhitti\Http\Middleware\Attributes\Middleware;
 
+#[Middleware(Authenticated::class)]
 class ProjectController extends Controller
 {
 	use ImageCustomize;
@@ -15,7 +17,6 @@ class ProjectController extends Controller
 	protected int $id;
 	function __construct()
 	{
-		$this->middleware(Authenticated::class);
 		$this->id = Session::get('auth_user_id');
 		$this->model = new Project();
 	}
@@ -49,7 +50,7 @@ class ProjectController extends Controller
 				->required(['name'])
 				->min('name', 3)
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 
@@ -111,7 +112,7 @@ class ProjectController extends Controller
 				->required(['id', 'name'])
 				->min('name', 3)
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 

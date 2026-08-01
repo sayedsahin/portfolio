@@ -8,22 +8,22 @@ use App\Middlewares\Authenticated;
 use App\Middlewares\Guest;
 use App\Supports\Auth;
 use App\Supports\Role;
-use App\Systems\Session\Cookie;
-use App\Systems\Session\RememberToken;
-use App\Validation\Validator;
+use Bhitti\Http\Middleware\Attributes\Middleware;
+use Bhitti\Session\Cookie;
+use Bhitti\Session\RememberToken;
+use Bhitti\Validation\ValidationException;
+use Bhitti\Validation\Validator;
 
 class AuthController extends Controller
 {
 
 	public function __construct()
 	{
-		// $this->middleware(RateLimit::class);
-		// $this->middleware(Csrf::class);
 	}
 
 	public function login()
 	{
-		return view('auth.login2', ['title' => 'Login']);
+		return view('auth.login', ['title' => 'Login']);
 	}
 
 	public function loginProcess()
@@ -48,7 +48,7 @@ class AuthController extends Controller
 			// $data['email']
 			// $data['password']
 
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (ValidationException $e) {
 			$errors = $e->errors();
 			return response()->redirect()->with(['errors' => $errors])->back();
 		}
@@ -93,17 +93,16 @@ class AuthController extends Controller
 		return response()->redirect('/')->with(['success' => 'Login Successful']);
 	}
 
+	#[Middleware(Guest::class)]
 	public function registration()
 	{
-		$this->middleware(Guest::class);
 		return view('auth.register', ['title' => 'Register']);
 	}
 
 
-
+	#[Middleware(Guest::class)]
 	public function registrationProcess()
 	{
-		$this->middleware(Guest::class);
 
 		/*
 		|-----------------------------------------------------------
@@ -172,7 +171,6 @@ class AuthController extends Controller
 
 	public function logout()
 	{
-		$this->middleware(Authenticated::class);
 		$userId = Auth::id();
 
 		if ($userId) {
@@ -183,9 +181,9 @@ class AuthController extends Controller
 		return response()->redirect('/login');
 	}
 
+	#[Middleware(Guest::class)]
 	public function forgot()
 	{
-		$this->middleware(Guest::class);
 		return view('forgot_password');
 	}
 }

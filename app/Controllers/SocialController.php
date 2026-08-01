@@ -1,18 +1,18 @@
-<?php 
+<?php
 namespace App\Controllers;
 
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\Social;
-use App\Systems\Session\Session;
 use App\Middlewares\Authenticated;
+use Bhitti\Http\Middleware\Attributes\Middleware;
 
+#[Middleware(Authenticated::class)]
 class SocialController extends Controller
 {
 	protected object $model;
 	function __construct()
 	{
 		$this->model = new Social;
-		$this->middleware(Authenticated::class);
 	}
 
 	public function index()
@@ -34,12 +34,12 @@ class SocialController extends Controller
 			$data = Validator::make($request->all())
 				->required(['name', 'link', 'icon'])
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 
 		$inserted = $this->model->insert($data);
-		
+
 		if ($inserted) {
 		    return response()->redirect('/socials')->with(['success' => 'Social Icon Submited Successfully']);
 		}
@@ -62,7 +62,7 @@ class SocialController extends Controller
 			$data = Validator::make($request->all())
 				->required(['id', 'name', 'link', 'icon'])
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 

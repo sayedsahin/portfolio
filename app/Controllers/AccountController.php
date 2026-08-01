@@ -1,13 +1,14 @@
-<?php 
+<?php
 namespace App\Controllers;
 
 use App\Middlewares\Guest;
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\User;
 use App\Supports\Auth;
-use App\Systems\Session\Cookie;
-use App\Systems\Session\RememberToken;
-use App\Systems\Session\Session;
+use Bhitti\Http\Middleware\Attributes\Middleware;
+use Bhitti\Session\Cookie;
+use Bhitti\Session\RememberToken;
+use Bhitti\Session\Session;
 
 class AccountController extends Controller
 {
@@ -18,9 +19,9 @@ class AccountController extends Controller
 		$data = [];
 	}
 
+    #[Middleware(Guest::class)]
 	public function index()
 	{
-		$this->middleware(Guest::class);
 		return view('auth.login');
 	}
 
@@ -33,7 +34,7 @@ class AccountController extends Controller
 				->required(['email', 'password'])
 				->email('email')
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 

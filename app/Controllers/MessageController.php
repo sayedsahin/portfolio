@@ -1,21 +1,19 @@
 <?php
 namespace App\Controllers;
 
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\Message;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use App\Systems\Session\Session;
+use Bhitti\Session\Session;
 use App\Middlewares\Authenticated;
+use Bhitti\Http\Middleware\Attributes\Middleware;
 
+#[Middleware(Authenticated::class)]
 class MessageController extends Controller
 {
 	protected object $model;
-	function __construct()
-	{
-		$this->middleware(Authenticated::class);
-	}
 
 	public function index()
 	{
@@ -44,7 +42,7 @@ class MessageController extends Controller
 				->required(['message_id', 'body', 'name', 'email'])
 				->email('email')
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 
@@ -89,7 +87,7 @@ class MessageController extends Controller
 				->required(['email', 'subject', 'body'])
 				->email('email')
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 

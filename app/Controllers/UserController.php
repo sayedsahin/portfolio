@@ -1,12 +1,14 @@
-<?php 
+<?php
 namespace App\Controllers;
 
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\User;
-use App\Systems\Session\Session;
+use Bhitti\Session\Session;
 use App\Middlewares\Authenticated;
 use App\Traits\ImageCustomize;
+use Bhitti\Http\Middleware\Attributes\Middleware;
 
+#[Middleware(Authenticated::class)]
 class UserController extends Controller
 {
 	use ImageCustomize;
@@ -14,7 +16,6 @@ class UserController extends Controller
 	protected int $id;
 	function __construct()
 	{
-		$this->middleware(Authenticated::class);
 		$this->id = Session::get('auth_user_id');
 	}
 	public function edit()
@@ -34,7 +35,7 @@ class UserController extends Controller
 			$data = Validator::make($request->all())
 				->required(['name'])
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return $this->errors($e->errors());
 		}
 
@@ -52,10 +53,10 @@ class UserController extends Controller
 				->required(['email'])
 				->email('email')
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return $this->errors($e->errors());
 		}
-		
+
 		$id = User::query()->where('id', $this->id)->update($data);
 		if ($id) {
 		    return $this->success('Email');
@@ -70,10 +71,10 @@ class UserController extends Controller
 				->required(['contact'])
 				->min('contact', 10)
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return $this->errors($e->errors());
 		}
-		
+
 		$id = User::query()->where('id', $this->id)->update($data);
 		if ($id) {
 		    return $this->success('Phone');
@@ -88,10 +89,10 @@ class UserController extends Controller
 				->required(['info'])
 				->min('info', 10)
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return $this->errors($e->errors());
 		}
-		
+
 		$id = User::query()->where('id', $this->id)->update($data);
 		if ($id) {
 		    return $this->success('Skill');
@@ -165,10 +166,10 @@ class UserController extends Controller
 				->required(['user_id', 'about_1'])
 				->min('about_1', 10)
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return $this->errors($e->errors());
 		}
-		
+
 		$id = db()->table('abouts')
 			->where('user_id', $data['user_id'])
 			->update([
@@ -187,10 +188,10 @@ class UserController extends Controller
 				->required(['user_id', 'about_2'])
 				->min('about_2', 10)
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return $this->errors($e->errors());
 		}
-		
+
 		$id = db()->table('abouts')
 			->where('user_id', $data['user_id'])
 			->update([

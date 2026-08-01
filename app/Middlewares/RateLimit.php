@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Middlewares;
 
-use App\Supports\RateLimiter;
-use App\Supports\RateLimitResult;
-use App\Systems\Middleware\MiddlewareInterface;
-use App\Systems\Response;
+use Bhitti\RateLimit\RateLimiter;
+use Bhitti\RateLimit\RateLimitResult;
+use Bhitti\Http\Middleware\MiddlewareInterface;
+use Bhitti\Http\Response;
+use Bhitti\Session\Session;
 
 final class RateLimit implements MiddlewareInterface
 {
@@ -85,9 +86,11 @@ final class RateLimit implements MiddlewareInterface
 
     private function webPolicy(): array
     {
-        if (isset($_SESSION['auth_user_id'])) {
+        $user_id = Session::get('auth_user_id');
+
+        if ($user_id !== null) {
             return [
-                'web:user:' . (int) $_SESSION['auth_user_id'],
+                'web:user:' . (int) $user_id,
                 (int) config(
                     'rate_limit.web.authenticated.max_attempts',
                     240

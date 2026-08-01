@@ -1,6 +1,6 @@
-# Pkathamo
+# Bhitti
 
-**Pkathamo** is a lightweight PHP framework built around three core principles: **Performance**, **Simplicity** and **Efficiency**.
+**Bhitti** is a lightweight PHP framework built around three core principles: **Performance**, **Simplicity** and **Efficiency**.
 
 ## Requirements
 
@@ -48,7 +48,7 @@ composer dump-autoload
 Configure the application in `.env`:
 
 ```dotenv
-APP_NAME=Pkathamo
+APP_NAME=Bhitti
 DEBUG_MODE=true
 BASE_URL=http://127.0.0.1:8000
 APP_TIMEZONE=UTC
@@ -56,7 +56,7 @@ APP_TIMEZONE=UTC
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_NAME=pkathamo
+DB_NAME=bhitti
 DB_USERNAME=root
 DB_PASSWORD=
 
@@ -66,10 +66,10 @@ SESSION_SAMESITE=Lax
 SESSION_SECURE=false
 
 CACHE_DRIVER=file
-CACHE_PREFIX=pkathamo:cache:
+CACHE_PREFIX=bhitti:cache:
 
 RATE_LIMIT_STORE=file
-RATE_LIMIT_PREFIX=pkathamo:rate-limit:
+RATE_LIMIT_PREFIX=bhitti:rate-limit:
 ```
 
 After changing `.env` or a cached configuration file, rebuild the configuration cache:
@@ -132,8 +132,8 @@ final class HomeController extends Controller
     public function index(): void
     {
         view('home', [
-            'title' => 'Pkathamo',
-            'heading' => 'Welcome to Pkathamo',
+            'title' => 'Bhitti',
+            'heading' => 'Welcome to Bhitti',
             'description' => 'A lightweight PHP framework for super-fast, simple and efficient web applications.',
         ]);
     }
@@ -239,7 +239,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Systems\Response;
+use Bhitti\Http\Response;
 
 final class UserController extends Controller
 {
@@ -445,8 +445,8 @@ declare(strict_types=1);
 
 namespace App\Middlewares;
 
-use App\Systems\Middleware\MiddlewareInterface;
-use App\Systems\Response;
+use Bhitti\Http\Middleware\MiddlewareInterface;
+use Bhitti\Http\Response;
 
 final class VerifiedEmail implements MiddlewareInterface
 {
@@ -490,7 +490,7 @@ return [
 Create a validator:
 
 ```php
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 
 $validator = Validator::make(request()->all())
     ->required(['name', 'email'])
@@ -532,7 +532,7 @@ Additional rules include:
 
 ## Database
 
-Pkathamo uses PDO for database access.
+Bhitti uses PDO for database access.
 
 ```php
 $users = db()
@@ -557,7 +557,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Systems\QueryBuilder;
+use Bhitti\Database\QueryBuilder;
 
 final class User extends QueryBuilder
 {
@@ -574,7 +574,7 @@ $users = User::query()
     ->get();
 ```
 
-Pkathamo models do not provide a full Active Record lifecycle, dirty tracking or automatic relationships.
+Bhitti models do not provide a full Active Record lifecycle, dirty tracking or automatic relationships.
 
 They provide a fixed table, reusable query methods and clean Query Builder access.
 
@@ -799,7 +799,7 @@ Role results are cached for the current request.
 ## Sessions
 
 ```php
-use App\Systems\Session\Session;
+use Bhitti\Session\Session;
 
 Session::set('key', $value);
 
@@ -906,7 +906,7 @@ Configure bindings in `config/container.php`:
 ```php
 return [
     'singletons' => [
-        \App\Systems\Database::class,
+        \Bhitti\Database::class,
     ],
 
     'bindings' => [],
@@ -927,7 +927,7 @@ Stateful objects such as Query Builder and Response should not be registered as 
 
 ## Exception Handling
 
-Pkathamo registers a central handler for:
+Bhitti registers a central handler for:
 
 - uncaught exceptions
 - PHP errors
@@ -1006,7 +1006,7 @@ composer dump-autoload --optimize
 ## Directory Structure
 
 ```text
-pkathamo/
+bhitti/
 ├── app/
 │   ├── Controllers/
 │   ├── Helpers/
@@ -1050,7 +1050,7 @@ pkathamo/
 
 ## Security
 
-Pkathamo includes:
+Bhitti includes:
 
 - PDO-bound query values
 - CSRF protection
@@ -1116,7 +1116,7 @@ runtime cache files
 
 Complete documentation is available in:
 
-[Read the Pkathamo Documentation](docs/README.md)
+[Read the Bhitti Documentation](docs/README.md)
 
 The documentation includes dedicated guides for:
 
@@ -1140,7 +1140,7 @@ The documentation includes dedicated guides for:
 
 ## Intended Use
 
-Pkathamo is suitable for:
+Bhitti is suitable for:
 
 - web applications
 - REST APIs

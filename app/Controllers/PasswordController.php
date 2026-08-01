@@ -1,18 +1,19 @@
 <?php
 namespace App\Controllers;
 
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\User;
-use App\Systems\Session\Session;
+use Bhitti\Session\Session;
 use App\Middlewares\Authenticated;
+use Bhitti\Http\Middleware\Attributes\Middleware;
 
+#[Middleware(Authenticated::class)]
 class PasswordController extends Controller
 {
 	protected object $model;
 	protected int $id;
 	function __construct()
 	{
-		$this->middleware(Authenticated::class);
 		$this->model = new User;
 		$this->id = Session::get('auth_user_id');
 	}
@@ -30,7 +31,7 @@ class PasswordController extends Controller
 				->required(['old-password', 'password', 'confirm-password'])
 				->min('password', 6)
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect()->with(['errors' => $e->errors()])->back();
 		}
 
@@ -44,7 +45,7 @@ class PasswordController extends Controller
 		if ($oldPassword === $newPassword) {
 		    return response()->redirect()->with(['error' => 'old-password and new-password is same'])->back();
 		}
-		
+
 
 		$user = $this->model->select('id', 'email', 'password')->where('id', $this->id)
 			->first();

@@ -1,20 +1,19 @@
 {
     "autoload": {
         "psr-4": {
+            "Bhitti\\": "src/Bhitti/",
             "App\\": "app/"
         },
         "files": [
-            "app/Helpers/helper.php",
-            "app/Helpers/text.php",
-            "app/Helpers/time.php"
+            "src/Bhitti/Supports/helper.php",
+            "app/Helpers/common.php"
         ]
     },
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
         "ext-mbstring": "*",
         "ext-pdo": "*",
         "nikic/fast-route": "^1.3",
-        "symfony/dotenv": "^7.4",
-        "phpmailer/phpmailer": "^7.1"
+        "symfony/dotenv": "^7.4"
     }
 }

@@ -1,16 +1,11 @@
 <?php
 namespace App\Controllers;
 
-use App\Middlewares\Authenticated;
-use App\Validation\Validator;
+use Bhitti\Validation\Validator;
 use App\Models\Home;
 
 class HomeController extends Controller
 {
-	function __construct()
-	{
-		// $this->middleware(Authenticated::class);
-	}
 
 	public function index()
 	{
@@ -41,7 +36,7 @@ class HomeController extends Controller
                 ->int('captcha_answer')
 				->email('email')
 				->validated();
-		} catch (\App\Validation\ValidationException $e) {
+		} catch (\Bhitti\Validation\ValidationException $e) {
 			return response()->redirect('/#submitMessage')->with(['errors' => $e->errors()]);
 		}
 
