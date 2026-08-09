@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title><?= $this->e($title ?? 'App') ?></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Optional SEO -->
+    <?php if (!empty($description)): ?>
+        <meta name="description" content="<?= $this->e($description) ?>">
+    <?php endif; ?>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles.css">
+</head>
+<body>
+
+    <!-- Page Content -->
+    <?= $this->section('content') ?>
+
+    <!-- Optional Scripts -->
+    <?= $this->section('scripts') ?>
+
+</body>
+</html>

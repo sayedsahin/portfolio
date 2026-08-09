@@ -4,7 +4,7 @@
 return [
 
     'singletons' => [
-        \Bhitti\Database::class,
+        \Bhitti\Database\Database::class,
         // \Http\Request::class,
         // \Http\Response::class,
         // \Cache\FileCache::class,

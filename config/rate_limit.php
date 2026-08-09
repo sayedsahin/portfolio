@@ -11,12 +11,8 @@ return [
     | redis: use for multiple servers or containers.
     | apcu/memcached: optional single-server stores.
     */
-    'driver' => env('RATE_LIMIT_STORE', 'file'),
-
-    'prefix' => env(
-        'RATE_LIMIT_PREFIX',
-        'bhitti:rate-limit:'
-    ),
+    'driver' => (string) env('RATE_LIMIT_STORE', 'file'),
+    'prefix' => (string) env('RATE_LIMIT_PREFIX', 'bhitti:rate-limit:'),
 
     'web' => [
         'guest' => [
@@ -39,10 +35,10 @@ return [
         'window_seconds' => 60,
         'routes' => [
             'POST /login',
-            // 'POST /register',
-            // 'POST /api/auth/login',
-            // 'POST /api/auth/register',
-            // 'POST /api/auth/forgot',
+            'POST /register',
+            'POST /api/auth/login',
+            'POST /api/auth/register',
+            'POST /api/auth/forgot',
         ],
     ],
 

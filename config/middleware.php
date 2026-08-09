@@ -11,8 +11,8 @@ return [
 
 
     'api' => [
-        // \App\Middlewares\ApiHeaders::class,
-        // \App\Middlewares\RateLimit::class,
+        \App\Middlewares\ApiHeaders::class,
+        \App\Middlewares\RateLimit::class,
         // \App\Middlewares\RateLimit::class,
         // \App\Middlewares\BearerAuth::class, //Not use globally
     ]
