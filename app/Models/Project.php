@@ -8,7 +8,7 @@ class Project extends QueryBuilder
 
 	public function socials()
 	{
-		return $this->select('icon, link')->table('socials')->get();
+		return $this->select('icon', 'link')->table('socials')->get();
 	}
 
 	public function project(int $id)

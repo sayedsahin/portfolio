@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46cc003174c288bc4c70f17c1eb48009",
+    "content-hash": "6fd80df261c0acb95bad0ba00e0824e4",
     "packages": [
         {
             "name": "nikic/fast-route",
@@ -140,16 +140,16 @@
         },
         {
             "name": "sayedsahin/bhitti-framework",
-            "version": "dev-main",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sayedsahin/bhitti-framework.git",
-                "reference": "e93fb0e90aa009afca858354fca37426a008dafc"
+                "reference": "b583e418dab7341ed37a8f897e8bdad042afbafe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sayedsahin/bhitti-framework/zipball/e93fb0e90aa009afca858354fca37426a008dafc",
-                "reference": "e93fb0e90aa009afca858354fca37426a008dafc",
+                "url": "https://api.github.com/repos/sayedsahin/bhitti-framework/zipball/b583e418dab7341ed37a8f897e8bdad042afbafe",
+                "reference": "b583e418dab7341ed37a8f897e8bdad042afbafe",
                 "shasum": ""
             },
             "require": {
@@ -159,8 +159,7 @@
                 "php": ">=8.3",
                 "symfony/dotenv": "^7.4"
             },
-            "default-branch": true,
-            "type": "project",
+            "type": "library",
             "autoload": {
                 "files": [
                     "src/Bhitti/Supports/helper.php"
@@ -176,22 +175,22 @@
             "description": "A lightweight, simple and performance-first PHP framework.",
             "support": {
                 "issues": "https://github.com/sayedsahin/bhitti-framework/issues",
-                "source": "https://github.com/sayedsahin/bhitti-framework/tree/main"
+                "source": "https://github.com/sayedsahin/bhitti-framework/tree/v0.2.0"
             },
-            "time": "2026-08-08T21:21:49+00:00"
+            "time": "2026-08-17T20:45:12+00:00"
         },
         {
             "name": "symfony/dotenv",
-            "version": "v7.4.14",
+            "version": "v7.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
-                "reference": "9b9c7a00e565238857eea0040dc9745e3576402e"
+                "reference": "99b5b14953237c89ed24f1af5ba34225caf598a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dotenv/zipball/9b9c7a00e565238857eea0040dc9745e3576402e",
-                "reference": "9b9c7a00e565238857eea0040dc9745e3576402e",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/99b5b14953237c89ed24f1af5ba34225caf598a4",
+                "reference": "99b5b14953237c89ed24f1af5ba34225caf598a4",
                 "shasum": ""
             },
             "require": {
@@ -236,7 +235,7 @@
                 "environment"
             ],
             "support": {
-                "source": "https://github.com/symfony/dotenv/tree/v7.4.14"
+                "source": "https://github.com/symfony/dotenv/tree/v7.4.15"
             },
             "funding": [
                 {
@@ -256,21 +255,17 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-06-05T06:22:21+00:00"
+            "time": "2026-07-26T10:22:28+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "sayedsahin/bhitti-framework": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.3",
-        "ext-mbstring": "*",
-        "ext-pdo": "*"
+        "php": ">=8.3"
     },
     "platform-dev": {},
     "plugin-api-version": "2.9.0"

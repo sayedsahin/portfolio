@@ -23,7 +23,7 @@ class ProjectController extends Controller
 
 	public function index()
 	{
-		$data['projects'] = $this->model->select('id, name, description, thumb')->order('id DESC')->get();
+		$data['projects'] = $this->model->select('id', 'name', 'description', 'thumb')->order('id DESC')->get();
 		return view('project.index', $data);
 	}
 
