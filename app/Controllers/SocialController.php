@@ -17,14 +17,14 @@ class SocialController extends Controller
 
 	public function index()
 	{
-		return view('social.index', [
+		return response()->view('social.index', [
 			'socials' => $this->model->get(),
 		]);
 	}
 
 	public function create()
 	{
-		return view('social.create');
+		return response()->view('social.create');
 	}
 
 	public function store()
@@ -50,7 +50,7 @@ class SocialController extends Controller
 	{
 		if (!$id) exit('404 not found');
 
-		return view('social.edit', [
+		return response()->view('social.edit', [
 			'social' => $this->model->find($id),
 		]);
 	}

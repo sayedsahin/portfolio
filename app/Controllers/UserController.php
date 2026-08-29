@@ -20,7 +20,7 @@ class UserController extends Controller
 	}
 	public function edit()
 	{
-		return view('user.edit', [
+		return response()->view('user.edit', [
 			'user' => User::query()->select('*')->find($this->id),
 			'about' => db()->table('abouts')
 				->where('user_id', $this->id)

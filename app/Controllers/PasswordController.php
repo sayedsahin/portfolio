@@ -20,7 +20,7 @@ class PasswordController extends Controller
 
 	public function edit()
 	{
-		return view('password.edit');
+		return response()->view('password.edit');
 	}
 
 	public function update()

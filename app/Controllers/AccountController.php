@@ -22,7 +22,7 @@ class AccountController extends Controller
     #[Middleware(Guest::class)]
 	public function index()
 	{
-		return view('auth.login');
+		return response()->view('auth.login');
 	}
 
 	public function login()

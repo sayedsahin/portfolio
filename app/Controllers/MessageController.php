@@ -19,7 +19,7 @@ class MessageController extends Controller
 	{
 		$messages = Message::query('mysql')->limit(100, 0)->order('id DESC')->get();
 		// dd($messages);
-		return view('message.index', [
+		return response()->view('message.index', [
 			'messages' => $messages,
 		]);
 	}
@@ -31,7 +31,7 @@ class MessageController extends Controller
 		$data['replies'] = Message::query('mysql')->table('replies')
 			->where('message_id', $id)
 			->get();
-	    return view('message.show', $data);
+	    return response()->view('message.show', $data);
 	}
 
 	public function reply()
@@ -76,7 +76,7 @@ class MessageController extends Controller
 	public function new()
 	{
 		// helper(['message']);
-	    return view('message.new');
+	    return response()->view('message.new');
 	}
 
 	public function sendMessage()

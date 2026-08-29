@@ -23,7 +23,7 @@ class AuthController extends Controller
 
 	public function login()
 	{
-		return view('auth.login', ['title' => 'Login']);
+		return response()->view('auth.login', ['title' => 'Login']);
 	}
 
 	public function loginProcess()
@@ -96,7 +96,7 @@ class AuthController extends Controller
 	#[Middleware(Guest::class)]
 	public function registration()
 	{
-		return view('auth.register', ['title' => 'Register']);
+		return response()->view('auth.register', ['title' => 'Register']);
 	}
 
 
@@ -184,6 +184,6 @@ class AuthController extends Controller
 	#[Middleware(Guest::class)]
 	public function forgot()
 	{
-		return view('forgot_password');
+		return response()->view('forgot_password');
 	}
 }

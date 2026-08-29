@@ -19,7 +19,7 @@ class SiteController extends Controller
 
 	public function edit()
 	{
-		return view('site.edit', [
+		return response()->view('site.edit', [
 			'site' => $this->model->find(1),
 		]);
 	}

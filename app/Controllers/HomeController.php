@@ -16,7 +16,7 @@ class HomeController extends Controller
         $captcha = $this->generateCaptcha('send_message');
         $data['captchaQuestion'] = $captcha['question'];
 
-		return view('home', $data);
+		return response()->view('home', $data);
 	}
 
 	public function project(int $id)
@@ -24,7 +24,7 @@ class HomeController extends Controller
 		$data = $this->homeData();
 		$data['project'] = Home::query()->project($id);
 		$data['images'] = db()->table('project_image')->where('project_id', $id)->get();
-		return view('project.show', $data);
+		return response()->view('project.show', $data);
 	}
 
 	public function contact()

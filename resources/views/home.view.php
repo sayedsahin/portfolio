@@ -98,7 +98,7 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Contact Section Form -->
-        <?php view('components.contact', ['captchaQuestion' => $captchaQuestion]); ?>
+        <?php $this->view('components.contact', ['captchaQuestion' => $captchaQuestion]); ?>
     </div>
 </section>
 <section class="page-section portfolio pt-0">

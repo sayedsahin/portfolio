@@ -12,6 +12,6 @@
     "require": {
         "php": ">=8.3",
         "phpmailer/phpmailer": "^7.1",
-        "sayedsahin/bhitti-framework": "^0.2"
+        "sayedsahin/bhitti-framework": "^0.3"
     }
 }
