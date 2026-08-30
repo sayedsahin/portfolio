@@ -24,12 +24,12 @@ class ProjectController extends Controller
 	public function index()
 	{
 		$data['projects'] = $this->model->select('id', 'name', 'description', 'thumb')->order('id DESC')->get();
-		return view('project.index', $data);
+		return response()->view('project.index', $data);
 	}
 
 	public function create()
 	{
-		return view('project.create');
+		return response()->view('project.create');
 	}
 
 	public function show(int $id=0)
@@ -39,7 +39,7 @@ class ProjectController extends Controller
 		$data['site'] = db()->table('sites')->find(1);
 		$data['images'] = db()->table('project_image')->where('project_id', $id)->get();
 
-		return view('project.show', $data);
+		return response()->view('project.show', $data);
 	}
 
 	public function store()
@@ -101,7 +101,7 @@ class ProjectController extends Controller
 
 		$data['project'] = $this->model->project($id);
 		$data['images'] = db()->table('project_image')->where('project_id', $id)->get();
-		return view('project.edit', $data);
+		return response()->view('project.edit', $data);
 	}
 
 	public function update(int $id=0)
